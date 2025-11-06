@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+
+    <link rel="stylesheet" href="Login.css">
+</head>
+<body>
+
+    <main class="container">
+
+        <div class="formularios">
+            <!--Login-->
+            <section class="formulario-login">
+                <h1>Faça Login</h1>
+                <p>Use sua conta existente</p>
+            
+                <form>
+                    <div class="grupo-input">
+                        <label for="email-login">E-mail</label>
+                        <input type="email" name="email-login" id="email-login">
+                    </div>
+                    <div class="grupo-input">
+                        <label for="senha-login">Senha</label>
+                        <input type="password" name="senha-login" id="senha-login">
+                    </div>
+                    <button type="submit">Enviar</button>
+                </form>
+            </section>
+            <!--Registro-->
+            <section class="formulario-registro">
+                <h1>Faça Registro</h1>
+                <p>Crie uma conta</p>
+            
+                <form>
+                    <div class="grupo-input">
+                        <label for="email-registro">E-mail</label>
+                        <input type="email" name="email-registro" id="email-registro">
+                    </div>
+                    <div class="grupo-input">
+                        <label for="senha-registro">Senha</label>
+                        <input type="password" name="senha-registro" id="senha-registro">
+                    </div>
+                    <div class="grupo-input">
+                        <label for="nome">Nome Completo</label>
+                        <input type="text" name="nome" id="nome">
+                    </div>
+                    <button type="submit">Enviar</button>
+                </form>
+            </section>
+        </div>
+
+        <div class="container-barralateral">
+            <div class="barra-lateral">
+                <section class="painel-lateral barra-esquerda">
+                    <h1>Logue-se</h1>
+                    <p>Volte a apreciar nossos serviços e repare seu PC novamente!</p>
+
+                    <button class="ghost" id="logar">Logar</button>
+                </section>
+
+                <section class="painel-lateral barra-direita">
+                    <h1>Registre-se</h1>
+                    <p>Crie uma conta para futuros reparos e aproveite nossos serviços!</p>
+
+                    <button class="ghost" id="registrar">Registrar</button>
+                </section>
+            </div>
+        </div>
+
+    </main>
+
+    <script src="Login.js"></script>
+</body>
+</html>
