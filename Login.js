@@ -5,5 +5,5 @@ const container = document.getElementById("container-barralateral")
 registrar.addEventListener("click", acionar());
 
 function acionar() {
-    registrar.classList.add('ativo');
+    container.classList.add('ativo');
 }

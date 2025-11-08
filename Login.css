@@ -191,4 +191,6 @@ button:focus {
 
 
 /* animação */
-.container-barralateral.
+.container-barralateral.ativo {
+    transform: translateX(100%);
+}
