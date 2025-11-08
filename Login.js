@@ -1,1 +1,1 @@
-const 
+const Registrar = document.getElementById("")
