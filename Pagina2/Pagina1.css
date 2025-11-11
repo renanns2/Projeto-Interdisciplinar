@@ -1,27 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
-  body {
-  margin: 110px;
-  min-height: 100vh;
-  background: linear-gradient(
-    to right,
-    hsl(229, 22%, 10%) 10%,   /* essa é a margem esquerda */
-    hsl(229, 22%, 15%) 10% 90%, /* no centro*/
-    hsl(229, 22%, 10%) 90%     /* margem direita */
-  );
+body {
+  height: 100vh;
   color: white;
-  font-family: Arial, sans-serif;
+  font-family: 'Montserrat', sans-serif;
+
+  background-color: #2C2F40;
+  overflow:hidden;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-h1{
-    position: fixed;
-  bottom: 320px;
-  right: 0;
-  width: 800px;
+main {
+  height: 100%;
+  width: 70%;
+  background-color: #1E202E;
+  box-shadow: 0 0 14px 0px #7546e863;
 }
 
-img{
-  bottom: 320px;
-  right: 0;
-  width: 700px;
-
-}
