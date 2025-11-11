@@ -1,0 +1,27 @@
+
+  body {
+  margin: 110px;
+  min-height: 100vh;
+  background: linear-gradient(
+    to right,
+    hsl(229, 22%, 10%) 10%,   /* essa é a margem esquerda */
+    hsl(229, 22%, 15%) 10% 90%, /* no centro*/
+    hsl(229, 22%, 10%) 90%     /* margem direita */
+  );
+  color: white;
+  font-family: Arial, sans-serif;
+}
+
+h1{
+    position: fixed;
+  bottom: 320px;
+  right: 0;
+  width: 800px;
+}
+
+img{
+  bottom: 320px;
+  right: 0;
+  width: 700px;
+
+}
