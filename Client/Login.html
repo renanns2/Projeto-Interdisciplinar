@@ -16,15 +16,18 @@
             <h1>Faça Login</h1>
             <p>Use sua conta existente</p>
         
-            <form>
+            <form method="POST" action="login.php">
+                <input type="hidden" name="acao" value="login"> <!--identificar no php qual é formulario e registro-->
+
                 <div class="grupo-input">
                     <label for="email-login">E-mail</label>
-                    <input type="email" name="email-login" id="email-login">
+                    <input type="email" name="email" id="email-login">
                 </div>
                 <div class="grupo-input">
                     <label for="senha-login">Senha</label>
-                    <input type="password" name="senha-login" id="senha-login">
+                    <input type="password" name="senha" id="senha-login">
                 </div>
+
                 <button type="submit">Enviar</button>
             </form>
         </section>
@@ -33,18 +36,28 @@
             <h1>Faça Registro</h1>
             <p>Crie uma conta</p>
         
-            <form>
+            <form method="POST" action="registro.php">
+                <input type="hidden" name="acao" value="registro"> <!--identificar no php qual é formulario e registro-->
+
                 <div class="grupo-input">
                     <label for="email-registro">E-mail</label>
-                    <input type="email" name="email-registro" id="email-registro">
+                    <input type="email" name="email" id="email-registro">
                 </div>
                 <div class="grupo-input">
                     <label for="senha-registro">Senha</label>
-                    <input type="password" name="senha-registro" id="senha-registro">
+                    <input type="password" name="senha" id="senha-registro">
                 </div>
                 <div class="grupo-input">
                     <label for="nome">Nome Completo</label>
                     <input type="text" name="nome" id="nome">
+                </div>
+
+                <div class="grupo-input"> 
+                    <label for="cargo">Selecione um cargo</label>
+                    <select name="cargo" id="cargo">
+                        <option value="client">Cliente</option>
+                        <option value="admin">Admin</option>
+                    </select>
                 </div>
                 <button type="submit">Enviar</button>
             </form>
@@ -73,6 +86,6 @@
 
     </main>
 
-    <script src="Login.js"></script>
+    <script src="js/Login.js"></script>
 </body>
 </html>
