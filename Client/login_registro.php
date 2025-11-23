@@ -1,4 +1,6 @@
 <?php
+
+    $painel = $_GET['painel'];
     // se ele chegou a essa pagina por meio de um formulario com metodo post, prosseguir
     if($_SERVER["REQUEST_METHOD"] === "POST") { 
 
@@ -12,18 +14,37 @@
             $nome = $_POST['nome'] ?? "";
             $cargo = $_POST['cargo'] ?? "";
 
+            $erro_registro[] = "";
+            $mensagens_registro[] = "";
+
             //Validação de dados
             if (empty($email)) {
-                $mensagens[] = 'Nenhum e-mail informado';
+                $mensagens[] = [
+                    'tipo' => 'registro',
+                    'status' => 'erro',
+                    'texto' => 'Nenhum email informado.',
+                ];
             }
             if (empty($senha)) {
-                $mensagens[] = 'Nenhuma senha informada';
+                $mensagens[] = [
+                    'tipo' => 'registro',
+                    'status' => 'erro',
+                    'texto' => 'Nenhuma senha informada.',
+                ];
             }
             if (empty($nome)) {
-                $mensagens[] = 'Nenhum nome informado';
+                $mensagens[] = [
+                    'tipo' => 'registro',
+                    'status' => 'erro',
+                    'texto' => 'Nenhum nome informado.',
+                ];
             }
             if (empty($cargo)) {
-                $mensagens[] = 'Nenhum cargo informado';
+                $mensagens[] = [
+                    'tipo' => 'registro',
+                    'status' => 'erro',
+                    'texto' => 'Nenhum cargo selecionado',
+                ];
             }
 
             if (empty($mensagens)) {
@@ -34,7 +55,11 @@
 
                 // se o número de linhas que veio for maior que 0, um email já existe.
                 if ($resultado->num_rows > 0) { 
-                    $mensagens[] = 'Esse email já está cadastrado!';
+                    $mensagens[] = [
+                        'tipo' => 'registro',
+                        'status' => 'erro',
+                        'texto' => 'Esse e-mail já está cadastrado.',
+                    ];
                 }else { // se nao tiver, inserir no banco de dados
                     // hash da senha pra mais segurança
                     $senha = password_hash(($senha), PASSWORD_DEFAULT); 
@@ -45,9 +70,17 @@
 
                     // se nao conseguiu se  cadastrar no banco de dados, informar um erro
                     if (!$con->query($sql)) { 
-                        $mensagens[] = 'Erro ao cadastrar: ' .$con->error;
+                        $mensagens[] = [
+                            'tipo' => 'registro',
+                            'status' => 'erro',
+                            'texto' => 'Erro ao cadastrar: ' .$con->error,
+                        ];
                     }else {
-                        $mensagens[] = 'Usuario cadastrado com sucesso!';
+                        $mensagens[] = [
+                            'tipo' => 'registro',
+                            'status' => 'sucesso',
+                            'texto' => 'Usuario cadastrado com sucesso!',
+                        ];
                     }
                 }
             }
@@ -59,10 +92,18 @@
             $senha = $_POST['senha'] ?? '';
 
             if (empty($email)) {
-                $mensagens[] = "Nenhum email informado.";
+                $mensagens[] = [
+                    'tipo' => 'login',
+                    'status' => 'erro',
+                    'texto' => 'Nenhum email informado.',
+                ];
             }
             if (empty($senha)) {
-                $mensagens[] = "Nenhuma senha informada.";
+                $mensagens[] = [
+                    'tipo' => 'login',
+                    'status' => 'erro',
+                    'texto' => 'Nenhuma senha informada.',
+                ];
             }
 
             if (empty($mensagens)) {
@@ -74,13 +115,25 @@
                     $hash = $usuarios['senha_hash'];
 
                     if (password_verify($senha, $hash)) {
-                        $mensagens[] = "Informações corretas! Login executado com sucesso.";
+                        $mensagens[] = [
+                            'tipo' => 'login',
+                            'status' => 'sucesso',
+                            'texto' => 'Informações corretas! Login executado com sucesso.',
+                        ];
                     }else {
-                        $mensagens[] = "Senha incorreta! Digite novamente!";
+                        $mensagens[] = [
+                            'tipo' => 'login',
+                            'status' => 'erro',
+                            'texto' => 'Senha incorreta! Digite novamente!',
+                        ];
                     }
 
                 }else {
-                    $mensagens[] = "Esse e-mail ainda não foi cadastrado.";
+                    $mensagens[] = [
+                        'tipo' => 'login',
+                        'status' => 'erro',
+                        'texto' => 'Esse e-mail ainda não foi cadastrado.',
+                    ];
                 }
             }
         }
@@ -99,28 +152,49 @@
     <title>Login</title>
 
     <link rel="stylesheet" href="css/Login.css">
-</head>
+</head> 
 <body>
 
-    <main id="container">
+    <main id="container" <?= $painel === 'registro' ? 'class="painel-direito-ativo"' : ''?>>
     
     <?php if (!empty($mensagens)) : ?>
         <div id="caixa_mensagem">
-            <h1>Informações do registro</h1>
+
+            <!-- TITULO !-->
+            <?php 
+            $tipo = $mensagens[0]['tipo'];
+            $status = $mensagens[0]['status'];
+            if ($tipo === 'login'):
+            ?>
+                <h1>Informações do login</h1>
+            <?php elseif ($tipo === 'registro') : ?>
+                <h1>Informações do registro</h1>
+            <?php endif; ?>
+
+            <!-- Mensagem !-->
             <?php 
                 foreach ($mensagens as $mensagem) { 
-                    echo "<p> $mensagem </p>";
+                    echo "<p>" .$mensagem['texto'] ."</p>";
                 }
             ?>
+
+            <!-- Botão !-->
+            <?php if ($status === 'erro') : ?>
+                <button onclick="history.back()">Tentar novamente</button>
+            <?php elseif ($status === 'sucesso' and $tipo === 'login') : ?>
+                <button>Continuar</button>
+            <?php elseif ($status === 'sucesso' and $tipo === 'registro') : ?>
+                <button onclick="document.getElementById('logar').click()">Voltar para o Login</button>
+            <?php endif; ?>
         </div>
     <?php endif; ?>
 
             <!--Login-->
-        <section class="formulario login">
+        <section class="formulario login"  <?= $painel === 'registro' ? 'style="z-index:1"' : ''?>>
             <h1>Faça Login</h1>
             <p>Use sua conta existente</p>
         
-            <form method="POST" action="login_registro.php#login">
+            <form method="POST" action="login_registro.php?painel=login">
                 <input type="hidden" name="acao" value="login"> <!--identificar no php qual é formulario e registro-->
 
                 <div class="grupo-input">
@@ -136,11 +210,11 @@
             </form>
         </section>
         <!--Registro-->
-        <section class="formulario registro">
+        <section class="formulario registro" <?= $painel === 'registro' ? 'style="z-index:5"' : '' ?>>
             <h1>Faça Registro</h1>
             <p>Crie uma conta</p>
         
-            <form method="POST" action="login_registro.php#registro">
+            <form method="POST" action="login_registro.php?painel=registro">
                 <input type="hidden" name="acao" value="registro"> <!--identificar no php qual é formulario e registro-->
 
                 <div class="grupo-input">

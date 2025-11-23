@@ -26,5 +26,24 @@ function desativar() {
         logarForm.style.zIndex = "5";   
         registroForm.style.zIndex = "1";
     }, 300); 
-
 }
+
+// Ao carregar a página
+window.addEventListener("DOMContentLoaded", () => {
+    const painelAtivo = localStorage.getItem('painelAtivo');
+
+    if (painelAtivo === 'registro') {
+        if (location.hash === "#registro") {
+            // Desliga transição temporariamente
+            container.classList.add('sem-transicao');
+
+            
+            container.classList.add('painel-direito-ativo');
+            logarForm.style.zIndex = "1";
+            registroForm.style.zIndex = "5";
+
+            // Reativa transições
+            container.classList.remove('sem-transicao');
+        }
+        }   
+});
