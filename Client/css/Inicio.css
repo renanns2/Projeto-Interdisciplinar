@@ -48,6 +48,12 @@ header > div {
   align-items: center;
 }
 
+img#logo{
+    height: 58%;
+    transform: translateX(70%);
+}
+
+
 nav {
   display: flex;
   flex-direction: row;
@@ -90,11 +96,11 @@ nav > div:hover .linha {
   background-color: #A358FF;
 }
 
-nav:has(> div:hover) #selecionado {
+nav:has(> div:not(#selecionado):hover) #selecionado {
   color: #9C9C9C;
 }
 
-nav:has(> div:hover) #selecionadolinha {
+nav:has(> div:not(#selecionado):hover) #selecionadolinha {
   background-color: #a358ff00;
 }
 
@@ -119,4 +125,3 @@ div#selecionadolinha {
 
   transition: background-color 0.5s ease-in-out;
 }
-
