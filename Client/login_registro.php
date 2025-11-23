@@ -1,6 +1,6 @@
 <?php
 
-    $painel = $_GET['painel'];
+    $painel = $_GET['painel'] ?? '';
     // se ele chegou a essa pagina por meio de um formulario com metodo post, prosseguir
     if($_SERVER["REQUEST_METHOD"] === "POST") { 
 
@@ -13,9 +13,6 @@
             $senha = $_POST['senha'] ?? "";
             $nome = $_POST['nome'] ?? "";
             $cargo = $_POST['cargo'] ?? "";
-
-            $erro_registro[] = "";
-            $mensagens_registro[] = "";
 
             //Validação de dados
             if (empty($email)) {
@@ -157,37 +154,93 @@
 
     <main id="container" <?= $painel === 'registro' ? 'class="painel-direito-ativo"' : ''?>>
     
-    <?php if (!empty($mensagens)) : ?>
-        <div id="caixa_mensagem">
+        <?php if (!empty($mensagens)) : ?>
+            <div id="overlay"></div>
+            <div id="caixa_mensagem">
+                
+                <?php 
+                $tipo = $mensagens[0]['tipo'];
+                $status = $mensagens[0]['status'];
+                ?>
+                <!--H1-->
+                <h1>
+                    <?php 
+                        if ($tipo === 'registro' && $status === 'erro') {
+                            echo 'Erro no sistema!';
+                        }
+                        if ($tipo === 'registro' && $status === 'sucesso') {
+                            echo 'Registro concluído!';
+                        }
 
-            <!-- TITULO !-->
-            <?php 
-            $tipo = $mensagens[0]['tipo'];
-            $status = $mensagens[0]['status'];
-            if ($tipo === 'login'):
-            ?>
-                <h1>Informações do login</h1>
-            <?php elseif ($tipo === 'registro') : ?>
-                <h1>Informações do registro</h1>
-            <?php endif; ?>
 
-            <!-- Mensagem !-->
-            <?php 
-                foreach ($mensagens as $mensagem) { 
-                    echo "<p>" .$mensagem['texto'] ."</p>";
-                }
-            ?>
+                        if ($tipo === 'login' && $status === 'erro') {
+                            echo 'Erro no login!';
+                        }
+                        if ($tipo === 'login' && $status === 'sucesso') {
+                            echo 'Login bem-sucedido!';
+                        }
+                    ?>
+                </h1>
 
-            <!-- Botão !-->
-            <?php if ($status === 'erro') : ?>
-                <button onclick="history.back()">Tentar novamente</button>
-            <?php elseif ($status === 'sucesso' and $tipo === 'login') : ?>
-                <button>Continuar</button>
-            <?php elseif ($status === 'sucesso' and $tipo === 'registro') : ?>
-                <button onclick="document.getElementById('logar').click()">Voltar para o Login</button>
-            <?php endif; ?>
-        </div>
-    <?php endif; ?>
+                <!--H2-->
+                <h2>
+                    <?php
+                        if ($tipo === 'registro' && $status === 'erro') {
+                            echo 'Algo deu errado';
+                        }
+
+                        if ($tipo === 'registro' && $status === 'sucesso') {
+                            echo 'Seja bem vindo(a) ao sistema!';
+                        }
+
+                        if ($tipo === 'login' && $status === 'erro') {
+                            echo 'Não foi possivel acessar sua conta';
+                        }
+
+                        if ($tipo === 'login' && $status === 'sucesso') {
+                            echo 'Acesso liberado';
+                        }
+                    ?>
+                </h2>
+
+                <!-- Mensagem !-->
+
+                <?php 
+                    foreach ($mensagens as $mensagem) { 
+                        echo '<p>' . $mensagem['texto'] . '</p>';
+                    }
+                ?>
+
+
+                <!-- Botão !-->
+                <!--Erro Login -->
+                <?php if ($status === 'erro' and $tipo === 'login'): ?>
+                    <button onclick="location.href='login_registro.php?painel=login'">Tentar novamente</button>
+                <!--Sucesso Login -->
+                <?php elseif ($status === 'sucesso' and $tipo === 'login') : ?>
+                    <button onclick="location.href='Inicio.html'">Continuar</button>
+
+                <!--Erro Registro -->
+                <?php elseif ($status === 'erro' and $tipo === 'registro') : ?>
+                    <button onclick="location.href='login_registro.php?painel=registro'">Tentar novamente</button>
+                <!--Sucesso Registro -->
+                <?php elseif ($status === 'sucesso' and $tipo === 'registro') : ?>
+                    <button onclick="desativar()"; >Voltar para o Login</button>
+                <?php endif; ?>
+            </div>
+
+            <script>
+                const caixamsg = document.getElementById("caixa_mensagem");
+                const overlay = document.getElementById("overlay"); 
+
+                setTimeout(() => {
+                caixamsg.classList.add('ativo');
+                overlay.classList.add('ativo');
+                }, 50);
+
+            </script>
+        <?php endif; ?>
+
 
             <!--Login-->
         <section class="formulario login"  <?= $painel === 'registro' ? 'style="z-index:1"' : ''?>>
