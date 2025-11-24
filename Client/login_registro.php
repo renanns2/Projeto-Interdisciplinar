@@ -87,7 +87,7 @@
         }else  if ($acao === 'login') {
             include_once "config.php";
 
-            $email = $_POST['email'] ?? '';
+            $email = $_POST['email'] ?? ''; 
             $senha = $_POST['senha'] ?? '';
 
             if (empty($email)) {
@@ -224,7 +224,7 @@
                     <button onclick="ocultar();">Tentar novamente</button>
                 <!--Sucesso Login -->
                 <?php elseif ($status === 'sucesso' and $tipo === 'login') : ?>
-                    <button onclick="location.href='Inicio.html'">Continuar</button>
+                    <button onclick="location.href='Inicio.php'">Continuar</button>
 
                 <!--Erro Registro -->
                 <?php elseif ($status === 'erro' and $tipo === 'registro') : ?>
@@ -311,7 +311,7 @@
                 <div class="grupo-input"> 
                     <label for="cargo">Selecione um cargo</label>
                     <select name="cargo" id="cargo">
-                        <option value="cliente">Cliente</option>
+                        <option value="cliente">Requisitante</option>
                         <option value="admin">Admin</option>
                     </select>
                 </div>
