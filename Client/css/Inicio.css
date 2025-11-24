@@ -7,10 +7,15 @@
   box-sizing: border-box;
 }
 
+html {
+  height: 100%;
+}
+
 body {
   margin: 0;
 
-  height: auto;
+  min-height: 100vh;
+  height: 100%;
   color: white;
   font-family: 'Montserrat', sans-serif;
 
@@ -21,18 +26,15 @@ body {
   align-items: center;
 }
 
-main {
-  height: auto;
+#pagina {
+  height: 100%;
   width: 70%;
   background-color: #1E202E;
   box-shadow: 0 0 14px 0px #7546e863;
+
+  display: flex;
+  flex-direction: column;
 }
-
-
-
-
-
-
 
 header  {
   display: flex;
@@ -127,3 +129,28 @@ div#selecionadolinha {
 
   transition: background-color 0.5s ease-in-out;
 }
+
+
+
+main {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+}
+
+#esquerda, #direita {
+  width: 50%;
+}
+
+#direita {
+  position: relative;
+}
+
+#direita > img {
+  height: 60%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translate(-20%, 20%);
+}
+
