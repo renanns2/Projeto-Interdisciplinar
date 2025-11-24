@@ -1,10 +1,13 @@
 <?php
     session_start();
 
+    /*
     if (!isset($_SESSION['usuario_id'])) {
         // se não tiver uma sessão ativa, voltar para o login
         header("Location: login_registro.php?painel=login");
     }
+    */
+
 ?>
 
 <!DOCTYPE html>
@@ -50,13 +53,25 @@
                 <div id="esquerda">
                     <h1>Bem Vindo</h1>
                     <h2>Comece a reparar o seu PC com a gente! <br> A melhor opção na sua INTRANET.</h2>
-                    <button id="Relatar">Relatar problema</button>
-                    <button id="Funcionarios">Funcionarios</button>
+                    <p>
+                        Lorem ipsum lozaddwa moasdlamsldmasdkdfgdfmglkmdfmlgk
+                        dfmkglmdflgmldkfmkgsmdfkldmslkfmsklmflksdmfklsmdfkmk
+                        Lorem ipsum lozaddwa moasdlamsldmasdkdfgdfmglkmdfmlgk
+                        dfmkglmdflgmldkfmkgsmdfkldmslkfmsklmflksdmfklsmdfkmk
+                        Lorem ipsum lozaddwa moasdlamsldmasdkdfgdfmglkmdfmlgk
+                        dfmkglmdflgmldkfmkgsmdfkldmslkfmsklmflksdmfklsmdfkmk
+                    </p>
+                    
+                        <div id="botoes">   
+                        <button id="Relatar">Relatar problema</button>
+                        <button id="Funcionarios">Funcionarios</button>
+                    </div>
                 </div>
                 
                 <div id="direita">
                     <img src="img/notebook.png" alt="notebook">
                 </div>
+                
                 
             </main>
         </div>
