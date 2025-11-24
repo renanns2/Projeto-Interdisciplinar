@@ -4,9 +4,6 @@ const container = document.getElementById("container")
 const registroForm = document.querySelector(".formulario.registro");
 const logarForm = document.querySelector(".formulario.login");
 
-const caixamsg = document.getElementById("caixa_mensagem");
-const overlay = document.getElementById("overlay");
-
 registrar.addEventListener("click", ativar);
 
 function ativar() {
@@ -29,7 +26,5 @@ function desativar() {
         logarForm.style.zIndex = "5";   
         registroForm.style.zIndex = "1";
     }, 300); 
-
-    caixamsg.style.display = 'none';
-    overlay.style.display = 'none';
 }
+

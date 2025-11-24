@@ -1,5 +1,7 @@
 <?php
 
+    session_start();
+
     $painel = $_GET['painel'] ?? '';
     // se ele chegou a essa pagina por meio de um formulario com metodo post, prosseguir
     if($_SERVER["REQUEST_METHOD"] === "POST") { 
@@ -112,6 +114,10 @@
                     $hash = $usuarios['senha_hash'];
 
                     if (password_verify($senha, $hash)) {
+                        $_SESSION['usuario_id'] = $usuarios['ID'];
+                        $_SESSION['usuario_nome'] = $usuarios['nome_completo'];
+                        $_SESSION['usuario_tipo'] = $usuarios['tipo_usuario'];
+
                         $mensagens[] = [
                             'tipo' => 'login',
                             'status' => 'sucesso',
@@ -215,17 +221,26 @@
                 <!-- Botão !-->
                 <!--Erro Login -->
                 <?php if ($status === 'erro' and $tipo === 'login'): ?>
-                    <button onclick="location.href='login_registro.php?painel=login'">Tentar novamente</button>
+                    <button onclick="ocultar();">Tentar novamente</button>
                 <!--Sucesso Login -->
                 <?php elseif ($status === 'sucesso' and $tipo === 'login') : ?>
                     <button onclick="location.href='Inicio.html'">Continuar</button>
 
                 <!--Erro Registro -->
                 <?php elseif ($status === 'erro' and $tipo === 'registro') : ?>
-                    <button onclick="location.href='login_registro.php?painel=registro'">Tentar novamente</button>
+                    <button onclick="ocultar();">Tentar novamente</button>
                 <!--Sucesso Registro -->
                 <?php elseif ($status === 'sucesso' and $tipo === 'registro') : ?>
-                    <button onclick="desativar()"; >Voltar para o Login</button>
+                    <button onclick="
+                        container.classList.remove('painel-direito-ativo');
+
+                        setTimeout(() => {
+                            logarForm.style.zIndex = '5';   
+                            registroForm.style.zIndex = '1';
+                        }, 300); 
+
+                        ocultar();
+                    ">Voltar para o Login</button>
                 <?php endif; ?>
             </div>
 
@@ -237,6 +252,16 @@
                 caixamsg.classList.add('ativo');
                 overlay.classList.add('ativo');
                 }, 50);
+
+                function ocultar() {
+                    caixamsg.classList.remove('ativo');
+                    overlay.classList.remove('ativo');
+
+                    setTimeout(() => {
+                        caixamsg.remove();
+                        overlay.remove();
+                    }, 300);
+                }
 
             </script>
         <?php endif; ?>
@@ -252,11 +277,11 @@
 
                 <div class="grupo-input">
                     <label for="email-login">E-mail</label>
-                    <input type="email" name="email" id="email-login">
+                    <input type="email" name="email" id="email-login" required>
                 </div>
                 <div class="grupo-input">
                     <label for="senha-login">Senha</label>
-                    <input type="password" name="senha" id="senha-login">
+                    <input type="password" name="senha" id="senha-login" required>
                 </div>
 
                 <button type="submit">Enviar</button>
@@ -272,15 +297,15 @@
 
                 <div class="grupo-input">
                     <label for="email-registro">E-mail</label>
-                    <input type="email" name="email" id="email-registro">
+                    <input type="email" name="email" id="email-registro" required>
                 </div>
                 <div class="grupo-input">
                     <label for="senha-registro">Senha</label>
-                    <input type="password" name="senha" id="senha-registro">
+                    <input type="password" name="senha" id="senha-registro" required>
                 </div>
                 <div class="grupo-input">
                     <label for="nome">Nome Completo</label>
-                    <input type="text" name="nome" id="nome">
+                    <input type="text" name="nome" id="nome" required>
                 </div>
 
                 <div class="grupo-input"> 
