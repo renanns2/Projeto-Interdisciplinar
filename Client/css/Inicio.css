@@ -7,6 +7,8 @@
   box-sizing: border-box;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
+
+  font-family: 'Montserrat', sans-serif;
 }
 
 html {
@@ -19,7 +21,6 @@ body {
   min-height: 100vh;
   height: 100%;
   color: white;
-  font-family: 'Montserrat', sans-serif;
 
   background-color: #2C2F40;
 
@@ -68,7 +69,7 @@ nav {
   gap: 25px;
 }
 
-nav > div {
+nav > a {
   height: 100%;
   width: 100%;
 
@@ -79,6 +80,8 @@ nav > div {
   font-weight: 500;
 
   position: relative;
+
+  text-decoration: none;
 }
 
 div.linha {
@@ -94,25 +97,25 @@ div.linha {
   transition: background-color 0.5s ease-in-out;
 }
 
-nav > div:hover {
+nav > a:hover {
   color: #ffffff;
 }
 
-nav > div:hover .linha {
+nav > a:hover .linha {
   background-color: #A358FF;
 }
 
-nav:has(> div:not(#selecionado):hover) #selecionado {
+nav:has(> a:not(#selecionado):hover) #selecionado {
   color: #9C9C9C;
 }
 
-nav:has(> div:not(#selecionado):hover) #selecionadolinha {
+nav:has(> a:not(#selecionado):hover) #selecionadolinha {
   background-color: #a358ff00;
 }
 
 
 
-div#selecionado {
+a#selecionado {
   color: white;
   font-family: 'Montserrat', sans-serif;
   font-weight: bolder;
@@ -142,6 +145,13 @@ main {
 
 #esquerda, #direita {
   width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  padding-left: 54px;
+  flex-wrap: wrap;
 }
 
 #esquerda > h1 {
@@ -158,11 +168,12 @@ main {
 }
 
 #Relatar, #Funcionarios {
-    padding: 10px;
-    color: #fff;
-    font-weight: 800;
-    font-size: 0.9em;
-    border-radius: 6px;
+  padding: 10px;
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.91em;
+  border-radius: 6px;
+  letter-spacing: 0.04em;
 }
 
 #Relatar {

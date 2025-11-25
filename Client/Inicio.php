@@ -25,26 +25,30 @@
                     <img src="img/LogoCliente.png" alt="Logo_Crafty" id="logo">
                 </div>
                 <nav>
-                    <div id="selecionado">
+                    <a href="#" id="selecionado">
                         Inicio
                         <div id="selecionadolinha"></div>
-                    </div>
-                    <div>
-                        Reparar
-                        <div class="linha"></div>
-                    </div>
-                    <div>
+                    </a>
+
+                    <a href="Reparar.html">
+                            Reparar
+                            <div class="linha"></div>
+                    </a>
+
+                    <a href="Funcionarios.php">
                         Funcionarios
                         <div class="linha"></div>
-                    </div>
-                    <div>
+                    </a>
+
+                    <a href="Chamados.php">
                         Chamados
                         <div class="linha"></div>
-                    </div>
-                    <div>
+                    </a>
+
+                    <a href="Conta.php">
                         Conta
                         <div class="linha"></div>
-                    </div>
+                    </a>
                 </nav>
             </header>
 
