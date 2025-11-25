@@ -13,10 +13,10 @@
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>
-        <title>Inicio</title>
+        <title>Reparar</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="css/Inicio.css">
+        <link rel="stylesheet" href="css/Reparar.css">
     </head>
     <body>
         <div id="pagina">
@@ -25,14 +25,14 @@
                     <img src="img/LogoCliente.png" alt="Logo_Crafty" id="logo">
                 </div>
                 <nav>
-                    <a href="#" id="selecionado">
+                    <a href="Inicio.php">
                         Inicio
-                        <div id="selecionadolinha"></div>
+                        <div class="linha"></div>
                     </a>
 
-                    <a href="Reparar.php">
+                    <a href="#" id="selecionado">
                             Reparar
-                            <div class="linha"></div>
+                            <div id="selecionadolinha"></div>
                     </a>
 
                     <a href="Funcionarios.php">
