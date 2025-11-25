@@ -31,7 +31,8 @@ body {
 
 #pagina {
   height: 100%;
-  width: 70%;
+  width: 80%;
+  max-width: 1152px;
   background-color: #1E202E;
   box-shadow: 0 0 14px 0px #7546e863;
 
@@ -206,9 +207,9 @@ main {
 }
 
 #direita > img {
-  height: 60%;
+  height: 70%;
   position: absolute;
   left: 0;
-  transform: translate(2%, 3%);
+  transform: translate(-6%, 2%);
 }
 

@@ -55,25 +55,18 @@
         
             <div id="reparar">
                 <main>
-                    <h1>REPARAR</h1>
-                    <h2>Que tipo de reparo você está procurando?</h2>
+                    <h1>COMPUTADOR</h1>
+                    <h2>Insira os detalhes do defeito</h2>
                     
-                    <div id="imagens">
-                        <a href="reparar_computador.php" id="computador">
-                            <img src="img/notebook_reparar.png" alt="Img_Notebook">
-                            <p>Computador</p>
-                        </a>
+                    <form method="GET" action="">
+                        <div class="grupo-input">
+                            <label for="numeropc">Numero do PC</label>
+                            <input type="number" name="numeropc" id="numeropc" required>
 
-                        <a href="reparar_perifericos.php" id="perifericos">
-                            <img src="img/perifericos_reparar.png" alt="Img_Perifericos">
-                            <p>Perifericos</p>
-                        </a>
-
-                        <a href="reparar_outros.php" id="outros">
-                            <img src="img/outros_reparar.png" alt="Img_Outros">
-                            <p>Outros</p>
-                        </a>
-                    </div>
+                            <label for="numeropc">Laboratorio do PC</label>
+                            <input type="number" name="numeropc" id="numeropc" required>
+                        </div>
+                    </form>
                 </main>
             </div>
         </div>
