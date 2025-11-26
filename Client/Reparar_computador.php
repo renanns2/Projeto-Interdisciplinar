@@ -16,7 +16,7 @@
         <title>Reparar</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="css/Reparar.css">
+        <link rel="stylesheet" href="css/Reparar_form.css">
     </head>
     <body>
         <div id="pagina">
@@ -59,12 +59,16 @@
                     <h2>Insira os detalhes do defeito</h2>
                     
                     <form method="GET" action="">
-                        <div class="grupo-input">
-                            <label for="numeropc">Numero do PC</label>
-                            <input type="number" name="numeropc" id="numeropc" required>
+                        <div class="duplaselecao">
+                            <div class="grupo-input">
+                                <label for="numeropc">Numero do PC</label>
+                                <input type="number" name="numeropc" id="numeropc" required>
+                            </div>
 
-                            <label for="numeropc">Laboratorio do PC</label>
-                            <input type="number" name="numeropc" id="numeropc" required>
+                            <div class="grupo-input">
+                                <label for="numerolab">Laboratorio do PC</label>
+                                <input type="number" name="numerolab" id="numerolab" required>
+                            </div>
                         </div>
                     </form>
                 </main>

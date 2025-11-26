@@ -31,8 +31,7 @@ body {
 
 #pagina {
   height: 100%;
-  width: 80%;
-  max-width: 1152px;
+  width: 70%;
   background-color: #1E202E;
   box-shadow: 0 0 14px 0px #7546e863;
 
@@ -114,8 +113,6 @@ nav:has(> a:not(#selecionado):hover) #selecionadolinha {
   background-color: #a358ff00;
 }
 
-
-
 a#selecionado {
   color: white;
   font-family: 'Montserrat', sans-serif;
@@ -136,83 +133,51 @@ div#selecionadolinha {
   transition: background-color 0.5s ease-in-out;
 }
 
-
+#reparar {
+  padding-left: 55px;
+  padding-right: 55px;
+  height: 100%;
+}
 
 main {
   display: flex;
-  flex-direction: row;
-  flex: 1;
-}
-
-#esquerda, #direita {
-  width: 50%;
-  display: flex;
   flex-direction: column;
-  align-content: center;
+  align-items: center;
   justify-content: center;
-  padding-left: 54px;
-  flex-wrap: wrap;
-  gap: 15px;
+  flex: 1;
+  height: 100%;
 }
 
-#esquerda > h1 {
-  font-size: 3em;
-  height: 1em;
-}
-
-#esquerda > h2 {
-  color: #A6A6A6;
-  font-size: 1.5em;
-}
-
-#esquerda > p {
+p {
   font-size: 0.9em;
 }
 
-#botoes {
+main > h1 {
+  font-size: 6em;
+  color: #a358ff33;
+  font-weight: 800;
+}
+
+main > h2 {
+  font-size: 1.8em;
+  transform: translateY(-114%);
+}
+
+main > form {
+  background-color: #31323E;
+  padding: 50px;
+  border-radius: 25px;
+
   display: flex;
-  gap: 30px;
+  flex-direction: column;
 }
 
-#Relatar, #Funcionarios {
-  padding: 10px;
-  color: #fff;
-  font-weight: 700;
-  font-size: 0.91em;
-  border-radius: 6px;
-  letter-spacing: 0.04em;
-  text-decoration: none;
-
-  transition: transform 0.3s ease-in-out;
-}
-
-#Relatar {
-  background-color: #A358FF;
-  border: 2px solid #A358FF;
-}
-
-#Funcionarios {
-  background-color: #ffffff00;
-  border: 2px solid white;
-}
-
-#Relatar:hover {
-  transform: scale(1.1);
-}
-#Funcionarios:hover {
-  transform: scale(1.1);
-}
-
-#direita {
-  position: relative;
-  padding: 0;
+form > .duplaselecao {
   display: flex;
-  height: 100%;
-  width: 50%;
-  align-content: flex-start;
+  flex-direction: row;
 }
 
-#direita > img {
-  height: 70%;
+.duplaselecao > .grupo-input {
+  display: flex;
+  flex-direction: column;
 }
-
