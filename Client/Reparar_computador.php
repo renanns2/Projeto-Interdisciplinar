@@ -62,13 +62,39 @@
                         <div class="duplaselecao">
                             <div class="grupo-input">
                                 <label for="numeropc">Numero do PC</label>
-                                <input type="number" name="numeropc" id="numeropc" required>
+                                <input type="number" name="numeropc" id="numeropc">
                             </div>
 
                             <div class="grupo-input">
                                 <label for="numerolab">Laboratorio do PC</label>
-                                <input type="number" name="numerolab" id="numerolab" required>
+                                <input type="number" name="numerolab" id="numerolab">
                             </div>
+                        </div>
+
+                        <div class="grupo-input">
+                                <label for="descricao">Descrição do problema</label>
+                                <input type="text" name="descricao" id="descricao" required>
+                        </div>
+
+                        <div class="duplaselecao">
+                            <div class="grupo-input">
+                                <label for="data_ocorrido">Data do ocorrido</label>
+                                <input type="date" name="data_ocorrido" id="data_ocorrido">
+                            </div>
+
+                            <div class="grupo-input">
+                                <label for="urgencia">Urgência</label>
+                                <select name="urgencia" id="urgencia">
+                                    <option value="baixa">Baixa</option>
+                                    <option value="media">Média</option>
+                                    <option value="alta">Alta</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="grupo-input">
+                                <label for="anexo">Anexo</label>
+                                <input type="img" name="anexo" id="anexo" required>
                         </div>
                     </form>
                 </main>

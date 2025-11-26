@@ -170,14 +170,37 @@ main > form {
 
   display: flex;
   flex-direction: column;
+  height: 70%;
 }
 
 form > .duplaselecao {
   display: flex;
   flex-direction: row;
+  gap: 30px;
 }
 
 .duplaselecao > .grupo-input {
   display: flex;
   flex-direction: column;
+  font-size: 1.1em;
+  gap: 5px;
+  width: 50%;
+}
+
+.grupo-input > input,select {
+  width: 100%;
+  border-radius: 8px;
+  background-color: #1D1E25;
+  border: 0px solid black;
+  
+  color: #fff;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  padding: 5px 10px 5px 10px;
+}
+
+#descricao {
+  height: 8em;
+
+  display: flex;
 }
