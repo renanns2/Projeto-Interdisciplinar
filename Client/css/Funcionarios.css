@@ -27,3 +27,13 @@ main > h2 {
   font-size: 1.8em;
   transform: translateY(-114%);
 }
+
+#caixafuncionarios {
+background-color: #7897;
+height: 100%;
+width: 100%;
+border-radius: 20px;
+display: flex;
+flex-direction: column;
+align-items: center;
+}

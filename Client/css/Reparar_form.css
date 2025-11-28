@@ -72,6 +72,10 @@ form > .duplaselecao {
   resize: vertical;
 }
 
+#descricao {
+  height: 8em;
+}
+
 #botao {
   display: flex;
   width: 100%;
@@ -88,5 +92,12 @@ form > .duplaselecao {
   border: 0px solid black;
   border-radius: 12px;
   padding: 10.3px;
+
+  transition: transform 0.3s ease-in-out;
 }
 
+#botao > button:hover {
+  transform: scale(1.1);
+}
+
+#botao > button:

@@ -61,6 +61,22 @@
                     <h1>FUNCIONARIOS</h1>
                     <h2>Que tipo de reparo você está procurando?</h2>
                     
+                    <div id="caixafuncionarios">
+                        <div class="perfil">
+                            <div class="esquerda"> 
+                                <img src="" alt="Foto_Perfil">
+                                <h1>Nome</h1>
+                                <h2>Status</h2>
+                            </div>
+
+                            <div class="direita">
+                                <h3>Informações extras</h3>
+                                <p>Horario de trabalho: </p>
+                                <p>Contato:</p>
+                                <p>Cargo:</p>
+                            </div>
+                        </div>
+                    </div>
                 </main>
             </div>
         </div>
