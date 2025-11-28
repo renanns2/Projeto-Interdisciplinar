@@ -76,6 +76,10 @@ form > .duplaselecao {
   height: 8em;
 }
 
+.grupo-input > #anexo {
+  padding: 10px;
+}
+
 #botao {
   display: flex;
   width: 100%;

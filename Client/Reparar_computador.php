@@ -60,16 +60,16 @@
                     <h1>COMPUTADOR</h1>
                     <h2>Insira os detalhes do defeito</h2>
                     
-                    <form method="GET" action="">
+                    <form method="GET" action="" enctype="multipart/form-data">
                         <div class="duplaselecao">
                             <div class="grupo-input">
                                 <label for="numeropc">Numero do PC</label>
-                                <input type="number" name="numeropc" id="numeropc">
+                                <input type="number" name="numeropc" id="numeropc" min="0" value="0">
                             </div>
 
                             <div class="grupo-input">
                                 <label for="numerolab">Laboratorio do PC</label>
-                                <input type="number" name="numerolab" id="numerolab">
+                                <input type="number" name="numerolab" id="numerolab" min="0" value="0">
                             </div>
                         </div>
 
@@ -96,7 +96,7 @@
 
                         <div class="grupo-input">
                                 <label for="anexo">Anexo</label>
-                                <input type="img" name="anexo" id="anexo" required>
+                                <input type="file" name="anexo" id="anexo" accept="image/*">
                         </div>
 
                         <div id="botao">
