@@ -8,6 +8,46 @@
     }
     */
 
+    $mensagens = [];
+
+    $tamanho_maximo = 2 * 1024 * 1024;
+    $tipos_permitidos = ['image/jpeg', 'image/png'];
+
+    if ($_SERVER["REQUEST_METHOD"] === "POST") {
+        $numeropc = $_POST["numeropc"] ?? "";
+        $numerolab = $_POST["numerolab"] ?? "";
+        $descricao = $_POST["descricao"] ?? "";
+        $data = $_POST["data_ocorrido"] ?? "";
+        $urgencia = $_POST["urgencia"] ?? "";
+
+        $anexo = $_FILES["anexo"];
+
+        if (isset($anexo) && $anexo['error'] === UPLOAD_ERR_OK) {
+            
+            if($anexo['file'] > $tamanho_maximo) {   
+                $mensagens = [
+                    'status' => 'erro',
+                    'mensagem' => 'O arquivo é muito grande!',
+                ];
+
+                $anexo = null;
+            }else if ($anexo != null && !in_array($anexo['type'], $tipos_permitidos)){
+                $mensagens = [
+                    'status' => 'erro',
+                    'mensagem' => 'Ocorreu um erro no upload do arquivo. Codigo: ' . $anexo['error'],
+                ];
+                
+                $anexo = null;
+            }else {
+                $anexo = null;
+            }
+
+        }else {
+            $anexo = null;
+        }
+        
+    }
+
 ?>
 
 <!DOCTYPE html>
@@ -60,7 +100,7 @@
                     <h1>COMPUTADOR</h1>
                     <h2>Insira os detalhes do defeito</h2>
                     
-                    <form method="GET" action="" enctype="multipart/form-data">
+                    <form method="POST" action="" enctype="multipart/form-data">
                         <div class="duplaselecao">
                             <div class="grupo-input">
                                 <label for="numeropc">Numero do PC</label>
@@ -100,7 +140,7 @@
                         </div>
 
                         <div id="botao">
-                            <button type="submit" id="clicar">Enviar</button>
+                            <button type="submit">Enviar</button>
                         </div>
 
                     </form>
