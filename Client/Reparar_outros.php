@@ -57,7 +57,7 @@
         
             <div id="reparar">
                 <main>
-                    <h1>PERIFERICOS</h1>
+                    <h1>OUTROS</h1>
                     <h2>Insira os detalhes do defeito</h2>
                     
                     <form method="GET" action="">
