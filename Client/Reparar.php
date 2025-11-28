@@ -16,6 +16,8 @@
         <title>Reparar</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="css/header.css">
+        <link rel="stylesheet" href="css/config.css">
         <link rel="stylesheet" href="css/Reparar.css">
     </head>
     <body>

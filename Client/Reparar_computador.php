@@ -16,6 +16,8 @@
         <title>Reparar</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="css/header.css">
+        <link rel="stylesheet" href="css/config.css">
         <link rel="stylesheet" href="css/Reparar_form.css">
     </head>
     <body>
@@ -30,7 +32,7 @@
                         <div class="linha"></div>
                     </a>
 
-                    <a href="#" id="selecionado">
+                    <a href="Reparar.php" id="selecionado">
                             Reparar
                             <div id="selecionadolinha"></div>
                     </a>
@@ -73,7 +75,7 @@
 
                         <div class="grupo-input">
                                 <label for="descricao">Descrição do problema</label>
-                                <input type="text" name="descricao" id="descricao" required>
+                                <textarea name="descricao" id="descricao" required></textarea>
                         </div>
 
                         <div class="duplaselecao">
@@ -96,6 +98,11 @@
                                 <label for="anexo">Anexo</label>
                                 <input type="img" name="anexo" id="anexo" required>
                         </div>
+
+                        <div id="botao">
+                            <button type="submit">Enviar</button>
+                        </div>
+
                     </form>
                 </main>
             </div>
