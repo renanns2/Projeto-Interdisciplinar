@@ -100,4 +100,6 @@ form > .duplaselecao {
   transform: scale(1.1);
 }
 
-#botao > button:
+#botao > button.clicado {
+  transform: scale(1.5);
+}
