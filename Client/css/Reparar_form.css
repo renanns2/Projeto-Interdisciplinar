@@ -58,7 +58,6 @@ form > .duplaselecao {
   width: 100%;
 }
 
-
 .grupo-input > input,select, #descricao {
   width: 100%;
   border-radius: 8px;
@@ -70,6 +69,14 @@ form > .duplaselecao {
   font-weight: 600;
   padding: 5px 10px 5px 10px;
   resize: vertical;
+
+  transition: background-color 0.3s ease-in-out;
+}
+
+.grupo-input:hover input,
+.grupo-input:hover select,
+.grupo-input:hover #descricao {
+  background-color: #0d0f18;
 }
 
 #descricao {
@@ -78,6 +85,16 @@ form > .duplaselecao {
 
 .grupo-input > #anexo {
   padding: 10px;
+}
+
+#preview {
+  position: absolute;
+  opacity: 0;
+}
+
+#preview.ativo {
+  position: relative;
+  opacity: 1;
 }
 
 #botao {

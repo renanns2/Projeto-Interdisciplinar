@@ -11,7 +11,7 @@
     $mensagens = [];
 
     $tamanho_maximo = 2 * 1024 * 1024;
-    $tipos_permitidos = ['image/jpeg', 'image/png'];
+    $tipos_permitidos = ['image/jpeg', 'image/png', 'image/jpg'];
 
     if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $numeropc = $_POST["numeropc"] ?? "";
@@ -21,31 +21,104 @@
         $urgencia = $_POST["urgencia"] ?? "";
 
         $anexo = $_FILES["anexo"];
+        
+        $arquivo_final = null;
 
-        if (isset($anexo) && $anexo['error'] === UPLOAD_ERR_OK) {
-            
-            if($anexo['file'] > $tamanho_maximo) {   
-                $mensagens = [
-                    'status' => 'erro',
-                    'mensagem' => 'O arquivo é muito grande!',
-                ];
-
-                $anexo = null;
-            }else if ($anexo != null && !in_array($anexo['type'], $tipos_permitidos)){
-                $mensagens = [
-                    'status' => 'erro',
-                    'mensagem' => 'Ocorreu um erro no upload do arquivo. Codigo: ' . $anexo['error'],
-                ];
+        if (isset($anexo) && $anexo['error'] !== UPLOAD_ERR_NO_FILE) {
+            if ($anexo['error'] === UPLOAD_ERR_OK) {
                 
-                $anexo = null;
+                if($anexo['size'] > $tamanho_maximo) {   
+                    $mensagens[] = [
+                        'status' => 'erro',
+                        'mensagem' => 'O arquivo é muito grande!',
+                    ];
+
+                    $anexo = null;
+                }else if (!in_array($anexo['type'], $tipos_permitidos)){
+                    $mensagens[] = [
+                        'status' => 'erro',
+                        'mensagem' => 'Ocorreu um erro no upload do arquivo. Codigo: ' . $anexo['error'],
+                    ];
+                    
+                    $anexo = null;
+                }else {
+                    $ext = pathinfo($anexo['name'], PATHINFO_EXTENSION); // pegar a extensão da imagem(jpg ou png, etc.)
+                    $arquivo_final = uniqid("anexo_") . "." . $ext; // criar um id unico depois de anexo_(id unico) e concatenar com a variavel de ponto final do arquivo.
+                    move_uploaded_file($anexo['tmp_name'], "uploads/". $arquivo_final); // o PHP cria um arquivo de nome temporario ate o arquivo ser movido, e esse é mracado pelo "tmp_name". Nós estamos movendo esse arquivo para "uploads/", e colocando o nome dele final.
+                }
             }else {
                 $anexo = null;
-            }
 
-        }else {
-            $anexo = null;
+                $mensagens[] = [
+                    'status' => 'erro',
+                    'mensagem' => 'Ocorreu um erro no upload da imagem.',
+                ];
+            }
+        }
+
+        if(empty($numeropc)) {
+            $mensagens[] = [
+                'status' => 'erro',
+                'mensagem' => 'O número do PC não foi informado.',
+            ];
+        }
+        if(empty($numerolab)) {
+            $mensagens[] = [
+                'status' => 'erro',
+                'mensagem' => 'O número do laboratório não foi informado.',
+            ];
+        }
+        if(empty($descricao)) {
+            $mensagens[] = [
+                'status' => 'erro',
+                'mensagem' => 'Nenhuma descriçao foi informada.',
+            ];
+        }
+
+        $erros = false;
+        //Verificando se tem erros
+        if (!empty($mensagens)) {
+
+            foreach ($mensagens as $m) {
+                if ($m['status'] === 'erro') {
+                    $erros = true;
+                    break;
+                }
+           }   
         }
         
+
+        //Inserir no banco
+        if (!$erros) {
+            include_once "config.php";
+            $solicitante = $_SESSION['usuario_nome'];
+
+            $sql = "INSERT INTO chamados(tipo, solicitante, data_ocorrido, urgencia, status, anexo, descricao) VALUES('computador', '$solicitante', '$data', '$urgencia', 'Aberto', '$arquivo_final', '$descricao');";
+
+            $chamado = $con->query($sql);
+            
+            if ($chamado) {
+                $idChamado = $con->insert_id;
+                
+                //Dados computador
+                $sql = "INSERT INTO chamado_computador(id_chamado, numero_lab, numero_pc) VALUES ('$idChamado', '$numerolab', '$numeropc');";
+                $computador = $con->query($sql);
+
+                if ($computador) {
+                    $mensagens[] = [
+                        'status' => 'sucesso',
+                        'mensagem' => 'Chamado executado com sucesso! ID do chamado: ' . $idChamado . '.',
+                    ];
+                }
+            }
+        }
+
+        if (!empty($mensagens)) {
+            foreach ($mensagens as $m) {
+                echo "<p>{$m['mensagem']}</p>";
+            }
+        }
+
     }
 
 ?>
@@ -104,12 +177,12 @@
                         <div class="duplaselecao">
                             <div class="grupo-input">
                                 <label for="numeropc">Numero do PC</label>
-                                <input type="number" name="numeropc" id="numeropc" min="0" value="0">
+                                <input type="number" name="numeropc" id="numeropc" min="1" required>
                             </div>
 
                             <div class="grupo-input">
                                 <label for="numerolab">Laboratorio do PC</label>
-                                <input type="number" name="numerolab" id="numerolab" min="0" value="0">
+                                <input type="number" name="numerolab" id="numerolab" min="1" required>
                             </div>
                         </div>
 
@@ -126,7 +199,7 @@
 
                             <div class="grupo-input">
                                 <label for="urgencia">Urgência</label>
-                                <select name="urgencia" id="urgencia">
+                                <select name="urgencia" id="urgencia" value="baixa">
                                     <option value="baixa">Baixa</option>
                                     <option value="media">Média</option>
                                     <option value="alta">Alta</option>
@@ -137,6 +210,8 @@
                         <div class="grupo-input">
                                 <label for="anexo">Anexo</label>
                                 <input type="file" name="anexo" id="anexo" accept="image/*">
+
+                                <img alt="Preview_Anexo" id="preview">
                         </div>
 
                         <div id="botao">
@@ -148,6 +223,6 @@
             </div>
         </div>
 
-   
+        <script src="js/reparar_form.js"></script>
     </body>
 </html>
