@@ -3,6 +3,12 @@
     session_start();
 
     $painel = $_GET['painel'] ?? '';
+
+    //se ele já esta logado, ir para pagina de inicio
+    if (isset($_SESSION['usuario_id'])) {
+        header ("Location: Inicio.php");
+    }
+
     // se ele chegou a essa pagina por meio de um formulario com metodo post, prosseguir
     if($_SERVER["REQUEST_METHOD"] === "POST") { 
 

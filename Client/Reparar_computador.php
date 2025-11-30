@@ -92,8 +92,9 @@
         if (!$erros) {
             include_once "config.php";
             $solicitante = $_SESSION['usuario_nome'];
+            $id_solicitante = $_SESSION['usuario_id'];
 
-            $sql = "INSERT INTO chamados(tipo, solicitante, data_ocorrido, urgencia, status, anexo, descricao) VALUES('computador', '$solicitante', '$data', '$urgencia', 'Aberto', '$arquivo_final', '$descricao');";
+            $sql = "INSERT INTO chamados(tipo, solicitante, data_ocorrido, urgencia, status, anexo, descricao, ID_Solicitante) VALUES('computador', '$solicitante', '$data', '$urgencia', 'Aberto', '$arquivo_final', '$descricao', '$id_solicitante');";
 
             $chamado = $con->query($sql);
             
@@ -209,9 +210,10 @@
 
                         <div class="grupo-input">
                                 <label for="anexo">Anexo</label>
-                                <input type="file" name="anexo" id="anexo" accept="image/*">
-
-                                <img alt="Preview_Anexo" id="preview">
+                                <div id="img">
+                                    <input type="file" name="anexo" id="anexo" accept="image/*">
+                                    <img alt="Preview_Anexo" id="preview">
+                                </div>
                         </div>
 
                         <div id="botao">
