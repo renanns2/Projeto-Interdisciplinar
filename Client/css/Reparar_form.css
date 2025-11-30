@@ -76,7 +76,8 @@ form > .duplaselecao {
 
 .grupo-input:hover input,
 .grupo-input:hover select,
-.grupo-input:hover #descricao {
+.grupo-input:hover #descricao,
+#img:hover input {
   background-color: #0d0f18;
 }
 
@@ -85,13 +86,17 @@ form > .duplaselecao {
 }
 
 #img {
-  background-color: #0d0f18;
-  border-radius: 8px 8px 20px 20px;
-  padding: 20px;
+  background-color: #1D1E25;
   gap: 10px;
+  border-radius: 8px;
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+#img.ativo {
+  border-radius: 8px 8px 20px 20px;
+  padding: 11px;
 }
 
 .grupo-input > #anexo {
@@ -106,8 +111,8 @@ form > .duplaselecao {
 #preview.ativo {
   position: relative;
   opacity: 1;
-  width: 20%;
-  margin: 0 20px 20px 20px;
+  width: 500px;
+  border-radius: 9px;
 }
 
 #botao {
@@ -136,4 +141,71 @@ form > .duplaselecao {
 
 #botao > button.clicado {
   transform: scale(1.5);
+}
+
+#overlay {
+  display: none;
+  opacity: 0;
+}
+
+#caixa_mensagem {
+  display: none;
+  opacity: 0;
+}
+
+#overlay.view {
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  background-color: #00000096;
+  width: 100vw;
+
+  z-index: 999;
+  opacity: 1;
+}
+
+#caixa_mensagem.view {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  background-color: #31323E;
+  color: white;
+  z-index: 1000;
+  opacity: 1;
+  padding: 20px;
+  border-radius: 20px;
+}
+
+#caixa_mensagem.view p {
+  color: #b7b7b7;
+  font-weight: 500;
+}
+
+#caixa_mensagem.view button {
+  margin-top: 20px;
+  width: 70%;
+  padding: 10.3px;
+
+  background-color: #A358FF;
+  color: #fff;
+  border: 0px solid black;
+  border-radius: 12px;
+
+  font-weight: 600;
+  font-size: 1.1em;
+
+
+  transition: transform 0.3s ease-in-out;
+}
+
+#caixa_mensagem.view > button:hover {
+  transform: scale(1.1);
 }

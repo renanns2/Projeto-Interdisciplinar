@@ -24,9 +24,13 @@
         
         $arquivo_final = null;
 
+        //Verificando se tem ERRO no Anexo
+        //Se tem um anexo e ele não está com erro de nenhum arquivo entao continuar
         if (isset($anexo) && $anexo['error'] !== UPLOAD_ERR_NO_FILE) {
+            //se o upload deu certo tudinho
             if ($anexo['error'] === UPLOAD_ERR_OK) {
                 
+                //Passou o tamanho maximo
                 if($anexo['size'] > $tamanho_maximo) {   
                     $mensagens[] = [
                         'status' => 'erro',
@@ -34,6 +38,7 @@
                     ];
 
                     $anexo = null;
+                //Não esta entre os tipos permitidos
                 }else if (!in_array($anexo['type'], $tipos_permitidos)){
                     $mensagens[] = [
                         'status' => 'erro',
@@ -41,21 +46,25 @@
                     ];
                     
                     $anexo = null;
+                //Deu tudo certo
                 }else {
                     $ext = pathinfo($anexo['name'], PATHINFO_EXTENSION); // pegar a extensão da imagem(jpg ou png, etc.)
                     $arquivo_final = uniqid("anexo_") . "." . $ext; // criar um id unico depois de anexo_(id unico) e concatenar com a variavel de ponto final do arquivo.
                     move_uploaded_file($anexo['tmp_name'], "uploads/". $arquivo_final); // o PHP cria um arquivo de nome temporario ate o arquivo ser movido, e esse é mracado pelo "tmp_name". Nós estamos movendo esse arquivo para "uploads/", e colocando o nome dele final.
                 }
+            //Se tem 
+            // se o upload deu errado
             }else {
                 $anexo = null;
 
-                $mensagens[] = [
+                $mensagens[] = [    
                     'status' => 'erro',
                     'mensagem' => 'Ocorreu um erro no upload da imagem.',
                 ];
             }
         }
 
+        //Validação de dados
         if(empty($numeropc)) {
             $mensagens[] = [
                 'status' => 'erro',
@@ -75,8 +84,9 @@
             ];
         }
 
+        //Verificando se na array mensagens tem algum erro.
+        //No codigo atual é impossivel se a variavel $mensagens existir não for um erro, mas pode ser algo pra pensar no futuro
         $erros = false;
-        //Verificando se tem erros
         if (!empty($mensagens)) {
 
             foreach ($mensagens as $m) {
@@ -110,16 +120,23 @@
                         'status' => 'sucesso',
                         'mensagem' => 'Chamado executado com sucesso! ID do chamado: ' . $idChamado . '.',
                     ];
+                }else { // Inseriu em chamado mas nao em chamado_computador -> Excluir o registro anterior
+                    $sql = "DELETE FROM `chamados` WHERE `chamados`.`ID` = $idChamado;";
+                    $computador = $con->query($sql);
+
+                    $mensagens[] = [
+                        'status' => 'erro',
+                        'mensagem' => 'Erro ao inserir na tabela chamados_computador! Verifique o banco de dados ou fale com um administrador do site.',
+                    ];
                 }
             }
         }
 
-        if (!empty($mensagens)) {
-            foreach ($mensagens as $m) {
-                echo "<p>{$m['mensagem']}</p>";
-            }
-        }
-
+        // Define que as respostas que irei enviar a partir de agora vai ser em JSON.
+        header("Content-Type: application/json");
+        // Agora a gnt ta voltando a resposta pro servidor JS, uma resposta JSON.
+        echo json_encode($mensagens);
+        exit;
     }
 
 ?>
@@ -168,13 +185,18 @@
                 </nav>
             </header>
 
+
+            <div id="overlay"></div>
+            <div id="caixa_mensagem"></div>
+
         
             <div id="reparar">
                 <main>
+
                     <h1>COMPUTADOR</h1>
                     <h2>Insira os detalhes do defeito</h2>
                     
-                    <form method="POST" action="" enctype="multipart/form-data">
+                    <form method="POST" action="" enctype="multipart/form-data" id="form">
                         <div class="duplaselecao">
                             <div class="grupo-input">
                                 <label for="numeropc">Numero do PC</label>
