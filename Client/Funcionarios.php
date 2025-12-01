@@ -10,8 +10,6 @@
     */
 ?>
 
-<!DOCTYPE html>
-<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,6 +19,7 @@
     <link rel="stylesheet" href="css/config.css">
     <link rel="stylesheet" href="css/Funcionarios.css">
 </head>
+
 <body>
         <div id="pagina">
             <header>
@@ -59,27 +58,96 @@
             <div id="funcionarios">
                 <main>
                     <h1>FUNCIONARIOS</h1>
-                    <h2>Que tipo de reparo você está procurando?</h2>
+                    <h2>Veja os funcionários disponíveis</h2>
                     
-                    <div id="caixafuncionarios">
-                        <div class="perfil">
-                            <div class="esquerda"> 
-                                <img src="" alt="Foto_Perfil">
-                                <h1>Nome</h1>
-                                <h2>Status</h2>
-                            </div>
+                   <div id="caixafuncionarios">
 
-                            <div class="direita">
-                                <h3>Informações extras</h3>
-                                <p>Horario de trabalho: </p>
-                                <p>Contato:</p>
-                                <p>Cargo:</p>
-                            </div>
-                        </div>
-                    </div>
-                </main>
-            </div>
+    <!-- FUNCIONÁRIO 1 -->
+    <div class="Caixa_Perfis">
+
+        <div class="imagem">
+            <img src="img/Goku.jpg" alt="Foto_Perfil">
         </div>
+
+        <div class="esquerda">
+            <h3>Brian</h3>
+            <h4>Online - Em atendimento </h4>
+        </div>
+
+        <div class="direita">
+            <h5>Informações extras</h5>
+            <p>Horario de trabalho:</p>
+            <p>Contato:</p>
+            <p>Cargo:</p>
+        </div>
+
+    </div>
+
+
+    <!-- FUNCIONÁRIO 2 -->
+    <div class="Caixa_Perfis">
+
+        <div class="imagem">
+            <img src="img/Sasuke.jpg" alt="Foto_Perfil">
+        </div>
+
+        <div class="esquerda">
+            <h3>Renann</h3>
+            <h4>Online - Formando aura</h4>
+        </div>
+
+        <div class="direita">
+            <h5>Informações extras</h5>
+            <p>Horario de trabalho:</p>
+            <p>Contato:</p>
+            <p>Cargo:</p>
+        </div>
+
+    </div>
+
+    <!--Funcionario 3-->
+     <div class="Caixa_Perfis">
+
+        <div class="imagem">
+            <img src="img/coiso2.jpg" alt="Foto_Perfil">
+        </div>
+
+        <div class="esquerda">
+            <h3>Gabriel Assis</h3>
+            <h4>Online - Explicando RPG</h4>
+        </div>
+
+        <div class="direita">
+            <h5>Informações extras</h5>
+            <p>Horario de trabalho:</p>
+            <p>Contato:</p>
+            <p>Cargo:</p>
+        </div>
+
+    </div>
+
+     <!-- FUNCIONÁRIO 4 -->
+    <div class="Caixa_Perfis">
+
+        <div class="imagem">
+            <img src="img/batmanpobre" alt="Foto_Perfil">
+        </div>
+
+        <div class="esquerda">
+            <h3>Pietro</h3>
+            <h4>Offline - Combatendo o Mau </h4>
+        </div>
+
+        <div class="direita">
+            <h5>Informações extras</h5>
+            <p>Horario de trabalho:</p>
+            <p>Contato:</p>
+            <p>Cargo:</p>
+        </div>
+
+    </div>
+
+</div>
 
    
     </body>

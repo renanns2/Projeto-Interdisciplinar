@@ -1,0 +1,108 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+/*Importa a fonte Montserrat */
+
+body{
+    margin: 0; /*Importa */
+  height: 100vh;
+  color: white; /* Cor do texto padrão */
+  font-family: 'Montserrat', sans-serif; /* Fonte definida */
+
+  background-color: #2C2F40; /* Cor de fundo do site */
+  overflow:hidden;
+
+  display: flex; /* Centralizar o conteúdo */
+  justify-content: center; /* Centraliza horizontalmente */
+  align-items: center;
+  
+}
+
+
+main { /* Negocio do meio onde fica o conteúdo */
+  height: 100%; /* Ocupa toda a altura da tela */
+  width: 70%;
+  background-color: #1E202E;
+  box-shadow: 0 0 14px 0px #7546e863; /* Sombra ao redor */
+}
+
+img {
+    width: 120px;       /* tamanho da logo */
+    display: block;     /* impede bugs do inline */
+    margin: 0 auto;     /* centraliza */
+    margin-bottom: 20px; /* espaço abaixo */
+    margin-top: 10px;    /* espaço acima */
+}
+
+nav.menu_lateral{
+width:210px; /* Largura fixa do menu */
+height: 100vh; /* Ocupa toda a altura da tela */
+background-color: #10101B; /* Espaçamento interno */
+padding: 20px 0 20px 0.5%;
+
+position: fixed; /* Fixa no lado esquerdo da tela */
+
+
+}
+
+.ParteGrande{
+    width: 100%;
+    padding-left: 5px; /* Leve espaço na esquerda */
+}
+
+
+ul{ /* Remove marcadores da lista */
+    height: 100%; /* Para preencher o menu */
+    list-style-type: none; /* Remove bolinhas */
+}
+
+
+ul li.item-menu a{ 
+color:#878787 ; /* Cor inicial dos textos e ícones */
+text-decoration: none; /* Remove sublinhado */
+font-size: 20px; /* Tamanho do texto */
+font-family: 'Montserrat', sans-serif; /* Fonte */
+font-weight: 500; /* Peso médio da fonte */
+padding: 20px 4% ; /* Espaço interno */
+display: flex; /* Deixa ícone + texto alinhados */
+line-height: 40px; /* Espaçamento vertical */
+}
+
+
+ul li.item-menu a .txt-linck{
+    margin-left: 15px;
+
+}
+
+ul li.item-menu a:hover{
+    color: white;
+    
+}
+
+ul li.item-menu2 a{
+    color: #878787 ;
+    text-decoration: none;
+    font-size: 20px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    padding: 20px 4% ;
+    margin-top: auto;
+    flex-direction: column;
+    gap: 20px;
+     line-height: 40px;
+
+}
+
+ul li.item-menu2:hover{
+    background: black;
+
+}
+
+
+ul li.item-menu2 a .txt-linck{
+    margin-left: 15px;
+}
+
+ul li.item-menu a .icone >i{
+    font-size: 30px;
+   
+
+}
