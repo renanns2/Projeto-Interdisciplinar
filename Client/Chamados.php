@@ -4,7 +4,7 @@
     /*
     if (!isset($_SESSION['usuario_id'])) {
         // se não tiver uma sessão ativa, voltar para o login
-        header("Location: login_registro.php?painel=login");
+        header("Location: ../login_registro.php?painel=login");
     }
     */
 ?>

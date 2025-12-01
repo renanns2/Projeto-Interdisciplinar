@@ -6,7 +6,7 @@
 
     //se ele já esta logado, ir para pagina de inicio
     if (isset($_SESSION['usuario_id'])) {
-        header ("Location: Inicio.php");
+        header ("Location: Client/Inicio.php");
     }
 
     // se ele chegou a essa pagina por meio de um formulario com metodo post, prosseguir
@@ -230,7 +230,7 @@
                     <button onclick="ocultar();">Tentar novamente</button>
                 <!--Sucesso Login -->
                 <?php elseif ($status === 'sucesso' and $tipo === 'login') : ?>
-                    <button onclick="location.href='Inicio.php'">Continuar</button>
+                    <button onclick="location.href='/Client/Inicio.php'">Continuar</button>
 
                 <!--Erro Registro -->
                 <?php elseif ($status === 'erro' and $tipo === 'registro') : ?>
