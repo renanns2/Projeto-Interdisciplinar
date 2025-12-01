@@ -14,14 +14,15 @@
     $tipos_permitidos = ['image/jpeg', 'image/png', 'image/jpg'];
 
     if ($_SERVER["REQUEST_METHOD"] === "POST") {
-        $numeropc = $_POST["numeropc"] ?? "";
-        $numerolab = $_POST["numerolab"] ?? "";
+        $tipo_problema = $_POST["tipo_problema"] ?? "";
+        $setor_lab = $_POST["setor_lab"] ?? "";
         $descricao = $_POST["descricao"] ?? "";
         $data = $_POST["data_ocorrido"] ?? "";
         $urgencia = $_POST["urgencia"] ?? "";
+        $tipo_personalizado = $_POST["tipo_personalizado"] ?? "";
 
+        //Anexo
         $anexo = $_FILES["anexo"];
-        
         $arquivo_final = null;
 
         //Verificando se tem ERRO no Anexo
@@ -65,22 +66,31 @@
         }
 
         //Validação de dados
-        if(empty($numeropc)) {
+        if(empty($tipo_problema)) {
             $mensagens[] = [
                 'status' => 'erro',
-                'mensagem' => 'O número do PC não foi informado.',
+                'mensagem' => 'Informe um tipo de problema!',
             ];
         }
-        if(empty($numerolab)) {
+        if(empty($setor_lab)) {
             $mensagens[] = [
                 'status' => 'erro',
-                'mensagem' => 'O número do laboratório não foi informado.',
+                'mensagem' => 'Informe um laboratorio ou setor!',
             ];
         }
         if(empty($descricao)) {
             $mensagens[] = [
                 'status' => 'erro',
                 'mensagem' => 'Nenhuma descriçao foi informada.',
+            ];
+        }
+        if(empty($tipo_personalizado)) {
+            $tipo_personalizado = null;
+        }
+        if(empty($data)) {
+            $mensagens[] = [
+                'status' => 'erro',
+                'mensagem' => 'Por favor, forneça uma data do ocorrido!',
             ];
         }
 
@@ -104,29 +114,29 @@
             $solicitante = $_SESSION['usuario_nome'];
             $id_solicitante = $_SESSION['usuario_id'];
 
-            $sql = "INSERT INTO chamados(tipo, solicitante, data_ocorrido, urgencia, status, anexo, descricao, ID_Solicitante) VALUES('computador', '$solicitante', '$data', '$urgencia', 'Aberto', '$arquivo_final', '$descricao', '$id_solicitante');";
+            $sql = "INSERT INTO chamados(tipo, solicitante, data_ocorrido, urgencia, status, anexo, descricao, ID_Solicitante, setor_lab) VALUES('outros', '$solicitante', '$data', '$urgencia', 'Aberto', '$arquivo_final', '$descricao', '$id_solicitante', '$setor_lab');";
 
             $chamado = $con->query($sql);
             
             if ($chamado) {
                 $idChamado = $con->insert_id;
                 
-                //Dados computador
-                $sql = "INSERT INTO chamado_outros(id_chamado, tipo_problema, tipo_personalizado) VALUES ('$idChamado', '$numerolab', '$numeropc');";
-                $computador = $con->query($sql);
+                //Dados outros
+                $sql = "INSERT INTO chamado_outros(id_chamado, tipo_problema, tipo_personalizado) VALUES ('$idChamado', '$tipo_problema', '$tipo_personalizado');";
+                $outros = $con->query($sql);
 
-                if ($computador) {
+                if ($outros) {
                     $mensagens[] = [
                         'status' => 'sucesso',
                         'mensagem' => 'Chamado executado com sucesso! ID do chamado: ' . $idChamado . '.',
                     ];
-                }else { // Inseriu em chamado mas nao em chamado_computador -> Excluir o registro anterior
+                }else { // Inseriu em chamado mas nao em chamado_outros -> Excluir o registro anterior
                     $sql = "DELETE FROM `chamados` WHERE `chamados`.`ID` = $idChamado;";
-                    $computador = $con->query($sql);
+                    $outros = $con->query($sql);
 
                     $mensagens[] = [
                         'status' => 'erro',
-                        'mensagem' => 'Erro ao inserir na tabela chamados_computador! Verifique o banco de dados ou fale com um administrador do site.',
+                        'mensagem' => 'Erro ao inserir na tabela chamados_outros! Verifique o banco de dados ou fale com um administrador do site.',
                     ];
                 }
             }
@@ -196,38 +206,47 @@
                     <h1>OUTROS</h1>
                     <h2>Insira os detalhes do defeito</h2>
                     
-                    <form method="POST" action="" enctype="multipart/form-data" id="form">
-                        <div class="duplaselecao">
-                            <div class="grupo-input">
-                                <label for="numeropc">Tipo de periférico</label>
-                                <input type="number" name="numeropc" id="numeropc">
-                            </div>
+                    <form method="POST" action="" enctype="multipart/form-data" id="form" data-action="Reparar_outros.php">
 
-                            <div class="grupo-input">
-                                <label for="numerolab">Número (se houver)</label>
-                                <input type="number" name="numerolab" id="numerolab">
-                            </div>
+                        <div class="grupo-input">
+                            <label for="tipo_perso">Tipo de problema/equipamento</label>
+                            <select name="tipo_problema" id="tipo_perso" value="">
+                                <option value="" selected disabled>Selecione uma opção</option>
+                                <option value="rede_wifi">Rede/Wifi</option>
+                                <option value="impressora">Impressora</option>
+                                <option value="projetor">Projetor</option>
+                                <option value="ar_condicionado">Ar condicionado</option>
+                                <option value="energia">Energia</option>
+                                <option value="software">Software específico(Excel, Photoshop, etc)</option>
+                                <option value="outro">Outro</option>
+                            </select>
+                        </div>
+
+                        <div class="grupo-input" id="outro_input">
+                            <label for="tipo_personalizado" id="outroTexto">Especifique:</label>
+                            <input type="text" id="tipo_personalizado" name="tipo_personalizado" placeholder="Digite um tipo especifico aqui.">
                         </div>
 
                         <div class="grupo-input">
-                                <label for="anexo">Laboratório ou setor</label>
-                                <input type="text" name="anexo" id="anexo" required>
+                                <label for="setor_lab">Laboratório ou Setor</label>
+                                <input type="text" name="setor_lab" id="setor_lab" required placeholder="Ex: SalaMaker">
                         </div>
 
                         <div class="grupo-input">
                                 <label for="descricao">Descrição do problema</label>
-                                <textarea name="descricao" id="descricao" required></textarea>
+                                <textarea name="descricao" id="descricao" required placeholder="Ex: O monitor não está funcionando"></textarea>
                         </div>
 
                         <div class="duplaselecao">
                             <div class="grupo-input">
                                 <label for="data_ocorrido">Data do ocorrido</label>
-                                <input type="date" name="data_ocorrido" id="data_ocorrido">
+                                <input type="date" name="data_ocorrido" id="data_ocorrido" min="2025-01-01" required>
                             </div>
 
                             <div class="grupo-input">
                                 <label for="urgencia">Urgência</label>
                                 <select name="urgencia" id="urgencia">
+                                    <option value="" selected disabled>Selecione uma opção</option>
                                     <option value="baixa">Baixa</option>
                                     <option value="media">Média</option>
                                     <option value="alta">Alta</option>

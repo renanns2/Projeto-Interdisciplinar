@@ -29,11 +29,12 @@ form.addEventListener("submit", function(e) {
     e.preventDefault(); // Prevenindo de recarregar a pagina e ação padrão
     
     const dados = new FormData(form); // Pegando os dados do formulario
+    const acaoPHP = form.dataset.action;
     console.log("FormData criado: ", [...dados.entries()]); // Colocando em uma array pra ficar + facil de ver
 
     // Vai enviar uma informação do formulario pro servidor, esperando  uma resposta.
     // Essa resposta vai vir em um formato RESPONSE
-    fetch("Reparar_computador.php", {
+    fetch(acaoPHP, {
         method: "POST",
         body: dados
     })
@@ -67,11 +68,14 @@ function mostrarMensagem(resposta) {
     //Pegando o status da posição 0.
     let status = resposta[0].status;
     let titulo = "";
+    let button = "";
     
     if (status === 'sucesso') {
         titulo = "Sucesso!";
+        button = `<button onclick="location.href='Chamados.php'">Ir para Chamados</button>`
     }else {
         titulo = "Erro!";
+        button = `<button id="tentar_nov">Tentar novamente</button>`
     }
 
     let html = `
@@ -82,7 +86,32 @@ function mostrarMensagem(resposta) {
         html += `<p>${m.mensagem}</p>`;
     });
 
-    html += `<button onclick="location.href='Chamados.php'">Ir para Chamados</button>`
+    html += button;
+
+    
 
     caixa.innerHTML = html;
+
+    const tentarnov = document.getElementById('tentar_nov');
+
+    tentarnov.addEventListener("click", tentar_Novamente);
+
+    function tentar_Novamente() {
+        overlay.classList.remove('view');
+        caixa.classList.remove('view');
 }
+}
+
+// Expandindo o campo de texto caso seja 'outro'
+
+const select = document.getElementById("tipo_perso");
+const outroInput = document.getElementById("outro_input");
+select.addEventListener("change", function() {
+    if (this.value === "outro") {
+        outroInput.classList.add('viewinput');
+        document.getElementById("outroTexto").required = true; // opcional, se quiser obrigar
+    } else {
+        outroInput.classList.remove('viewinput');
+        document.getElementById("outroTexto").required = false; // desativa obrigatório
+    }
+})

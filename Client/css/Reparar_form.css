@@ -81,6 +81,19 @@ form > .duplaselecao {
   background-color: #0d0f18;
 }
 
+#outro_input {
+  display: none;
+  opacity: 0;
+}
+
+#outro_input.viewinput {
+  display: flex;
+  flex-direction: column;
+  opacity: 1;
+  margin-top: -15px;
+  color: #d5d5d5;
+}
+
 #descricao {
   height: 8em;
 }

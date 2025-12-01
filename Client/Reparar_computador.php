@@ -15,7 +15,7 @@
 
     if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $numeropc = $_POST["numeropc"] ?? "";
-        $numerolab = $_POST["numerolab"] ?? "";
+        $setor_lab = $_POST["setor_lab"] ?? "";
         $descricao = $_POST["descricao"] ?? "";
         $data = $_POST["data_ocorrido"] ?? "";
         $urgencia = $_POST["urgencia"] ?? "";
@@ -71,7 +71,7 @@
                 'mensagem' => 'O número do PC não foi informado.',
             ];
         }
-        if(empty($numerolab)) {
+        if(empty($setor_lab)) {
             $mensagens[] = [
                 'status' => 'erro',
                 'mensagem' => 'O número do laboratório não foi informado.',
@@ -81,6 +81,12 @@
             $mensagens[] = [
                 'status' => 'erro',
                 'mensagem' => 'Nenhuma descriçao foi informada.',
+            ];
+        }
+        if(empty($data)) {
+            $mensagens[] = [
+                'status' => 'erro',
+                'mensagem' => 'Por favor, forneça uma data do ocorrido!',
             ];
         }
 
@@ -104,7 +110,7 @@
             $solicitante = $_SESSION['usuario_nome'];
             $id_solicitante = $_SESSION['usuario_id'];
 
-            $sql = "INSERT INTO chamados(tipo, solicitante, data_ocorrido, urgencia, status, anexo, descricao, ID_Solicitante) VALUES('computador', '$solicitante', '$data', '$urgencia', 'Aberto', '$arquivo_final', '$descricao', '$id_solicitante');";
+            $sql = "INSERT INTO chamados(tipo, solicitante, data_ocorrido, urgencia, status, anexo, descricao, ID_Solicitante, setor_lab) VALUES('computador', '$solicitante', '$data', '$urgencia', 'Aberto', '$arquivo_final', '$descricao', '$id_solicitante', '$setor_lab');";
 
             $chamado = $con->query($sql);
             
@@ -112,7 +118,7 @@
                 $idChamado = $con->insert_id;
                 
                 //Dados computador
-                $sql = "INSERT INTO chamado_computador(id_chamado, numero_lab, numero_pc) VALUES ('$idChamado', '$numerolab', '$numeropc');";
+                $sql = "INSERT INTO chamado_computador(id_chamado, numero_pc) VALUES ('$idChamado', '$numeropc');";
                 $computador = $con->query($sql);
 
                 if ($computador) {
@@ -196,28 +202,28 @@
                     <h1>COMPUTADOR</h1>
                     <h2>Insira os detalhes do defeito</h2>
                     
-                    <form method="POST" action="" enctype="multipart/form-data" id="form">
+                    <form method="POST" action="" enctype="multipart/form-data" id="form" data-action="Reparar_computador.php">
                         <div class="duplaselecao">
                             <div class="grupo-input">
                                 <label for="numeropc">Numero do PC</label>
-                                <input type="number" name="numeropc" id="numeropc" min="1" required>
+                                <input type="number" name="numeropc" id="numeropc" min="1" required placeholder="Ex: 24">
                             </div>
 
                             <div class="grupo-input">
-                                <label for="numerolab">Laboratorio do PC</label>
-                                <input type="number" name="numerolab" id="numerolab" min="1" required>
+                                <label for="setor_lab">Laboratorio/Setor</label>
+                                <input type="text" name="setor_lab" id="setor_lab" required placeholder="Ex: Laboratorio 02">
                             </div>
                         </div>
 
                         <div class="grupo-input">
                                 <label for="descricao">Descrição do problema</label>
-                                <textarea name="descricao" id="descricao" required></textarea>
+                                <textarea name="descricao" id="descricao" required placeholder="Ex: O monitor não está funcionando"></textarea>
                         </div>
 
                         <div class="duplaselecao">
                             <div class="grupo-input">
                                 <label for="data_ocorrido">Data do ocorrido</label>
-                                <input type="date" name="data_ocorrido" id="data_ocorrido">
+                                <input type="date" name="data_ocorrido" id="data_ocorrido" min="2025-01-01" required>
                             </div>
 
                             <div class="grupo-input">
