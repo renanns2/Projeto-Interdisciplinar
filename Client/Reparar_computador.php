@@ -1,12 +1,12 @@
 <?php
     session_start();
 
-    /*
+    
     if (!isset($_SESSION['usuario_id'])) {
         // se não tiver uma sessão ativa, voltar para o login
         header("Location: ../login_registro.php?painel=login");
     }
-    */
+    
 
     $mensagens = [];
 
@@ -42,7 +42,7 @@
                 }else if (!in_array($anexo['type'], $tipos_permitidos)){
                     $mensagens[] = [
                         'status' => 'erro',
-                        'mensagem' => 'Ocorreu um erro no upload do arquivo. Codigo: ' . $anexo['error'],
+                        'mensagem' => 'Ocorreu um erro no tipo do arquivo do arquivo. Codigo: ' . $anexo['error'],
                     ];
                     
                     $anexo = null;

@@ -91,7 +91,7 @@
             }
             
         }else  if ($acao === 'login') {
-            include_once "config.php";
+            include_once "Client/config.php";
 
             $email = $_POST['email'] ?? ''; 
             $senha = $_POST['senha'] ?? '';

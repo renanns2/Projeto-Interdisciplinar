@@ -1,7 +1,7 @@
-div#chamados {
-    padding-left: 55px;
-    padding-right: 55px;
-    min-height: 100vh;
+#chamados {
+  padding-left: 55px;
+  padding-right: 55px;
+  padding-top: 3%;
 }
 
 main {
@@ -26,4 +26,62 @@ main > h1 {
 main > h2 {
   font-size: 1.8em;
   transform: translateY(-114%);
+}
+
+#chamados_ativos {
+  background-color: #31323E;
+  width: 80%;
+  height: auto;
+  border-radius: 34px;
+  padding: 31px 50px 50px 50px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+#order {
+  background-color: #191A20;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  border-radius: 20px;
+}
+
+#ordenar, #chamado {
+  background-color: #191A20;
+  border-radius: 20px;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 15px 35px;
+}
+
+#chamado {
+  color: white;
+}
+
+#chamado > #esquerda h1 {
+  font-size: 1.7em;
+  font-weight: 500;
+}
+
+#chamado > #esquerda h2 {
+  font-size: 1.2em;
+  font-weight: 500;
+  color: #B80B0B;
+}
+
+#chamado > #esquerda p {
+  color: #ffffffab;
+}
+
+#chamado > #esquerda {
+  width: 50%;
+}
+
+#chamado > #direita {
+  width: 50%;
 }
