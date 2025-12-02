@@ -76,9 +76,9 @@
 
         <div class="direita">
             <h5>Informações extras</h5>
-            <p>Horario de trabalho:</p>
-            <p>Contato:</p>
-            <p>Cargo:</p>
+            <p>Horario de trabalho: 15h-19h</p>
+            <p>Contato: (11) 76287-2983</p>
+            <p>Cargo: Programador</p>
         </div>
 
     </div>
@@ -98,9 +98,9 @@
 
         <div class="direita">
             <h5>Informações extras</h5>
-            <p>Horario de trabalho:</p>
-            <p>Contato:</p>
-            <p>Cargo:</p>
+            <p>Horario de trabalho: 24h </p>
+            <p>Contato: (22) 73842-6373</p>
+            <p>Cargo: Patrão</p>
         </div>
 
     </div>
@@ -119,9 +119,9 @@
 
         <div class="direita">
             <h5>Informações extras</h5>
-            <p>Horario de trabalho:</p>
-            <p>Contato:</p>
-            <p>Cargo:</p>
+            <p>Horario de trabalho: 08h-14h</p>
+            <p>Contato: (99) 64537-7654</p>
+            <p>Cargo:Analista de redes</p>
         </div>
 
     </div>
@@ -130,7 +130,7 @@
     <div class="Caixa_Perfis">
 
         <div class="imagem">
-            <img src="img/batmanpobre" alt="Foto_Perfil">
+            <img src="img/pietro.png" alt="Foto_Perfil">
         </div>
 
         <div class="esquerda">
@@ -140,9 +140,9 @@
 
         <div class="direita">
             <h5>Informações extras</h5>
-            <p>Horario de trabalho:</p>
-            <p>Contato:</p>
-            <p>Cargo:</p>
+            <p>Horario de trabalho: 14h-15h</p>
+            <p>Contato: (11) 98274-4353</p>
+            <p>Cargo: Analista de redes</p>
         </div>
 
     </div>

@@ -32,7 +32,7 @@ main > h2 {
 
 #caixafuncionarios {
 height: 500px;
-width: 70%;
+width: 100%;
 margin: auto;
 border-radius: 20px;
 display: flex;
@@ -100,5 +100,5 @@ gap: 20px;
 .direita p {
     margin: 2px 0;
     color: #cfd3db;
-    font-size: 0.9rem;
+    font-size: 10px;
 }
