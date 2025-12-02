@@ -76,7 +76,7 @@
 
         <div class="direita">
             <h5>Informações extras</h5>
-            <p>Horario de trabalho: 15h-19h</p>
+            <p>Horario de trabalho: 19h</p>
             <p>Contato: (11) 76287-2983</p>
             <p>Cargo: Programador</p>
         </div>
@@ -119,9 +119,9 @@
 
         <div class="direita">
             <h5>Informações extras</h5>
-            <p>Horario de trabalho: 08h-14h</p>
+            <p>Horario de trabalho: 08h</p>
             <p>Contato: (99) 64537-7654</p>
-            <p>Cargo:Analista de redes</p>
+            <p>Cargo: Analista de redes</p>
         </div>
 
     </div>
@@ -140,7 +140,7 @@
 
         <div class="direita">
             <h5>Informações extras</h5>
-            <p>Horario de trabalho: 14h-15h</p>
+            <p>Horario de trabalho: 15h</p>
             <p>Contato: (11) 98274-4353</p>
             <p>Cargo: Analista de redes</p>
         </div>

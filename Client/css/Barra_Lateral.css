@@ -72,6 +72,11 @@ ul li.item-menu a .txt-linck{
 
 }
 
+ul li.item-menula a{
+    color: white;
+    
+}
+
 ul li.item-menu a:hover{
     color: white;
     
