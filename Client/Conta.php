@@ -1,79 +1,136 @@
+<?php
+    session_start();
+
+    /*
+    if (!isset($_SESSION['usuario_id'])) {
+        // se não tiver uma sessão ativa, voltar para o login
+        header("Location: ../login_registro.php?painel=login");
+    }
+    */
+
+    $id_user = $_SESSION['usuario_id'];
+    include_once "config.php";
+
+    $sql = "SELECT * FROM usuarios WHERE ID = $id_user";
+    $resultado = $con->query($sql);
+
+    if ($resultado->num_rows > 0) {
+        $usuario = $resultado->fetch_assoc();
+    }else {
+        echo 'Ocorreu um erro.';
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>
-        <title>Inicio</title>
+        <title>Conta</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="css/Barra_Lateral.css">
-         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
-        </head>
+        <link rel="stylesheet" href="css/config.css">
+        <link rel="stylesheet" href="css/Conta.css">
 
-        <body>
-<main>
-<!------------------------------------BARRA LATERAL-------------------------------------------------------------------->
-             <nav class="menu_lateral">
-                <div class ="ParteGrande"> <!--Esse é o negocio inteiro Bella-->
-                     <img src="img/LogoCliente.png" alt="logo">
-                        </div> <!--Fecha a parte que expande-->
+        <script src="https://kit.fontawesome.com/de310c1571.js" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <div id="pagina">
+            <header>
+                <div>
+                    <img src="img/crafty_barra_lateral.png" alt="Logo_Crafty" id="logo">
+                </div>
+                <nav>
+                    <a href="Inicio.php">
+                        <i class="fa-solid fa-house-chimney"></i>
+                        Inicio
+                    </a>
 
-<ul>
-<li class="item-menu">
-    <a href="PaginaInicio_Login.html" onclick="abrirInicio()"> <!--# Vazio-->
-        <span class="icones"> <i class="bi bi-house-door-fill"></i> </span>
-        <span class="txt-linck">Inicio</span>
-    </a>
-</li>
+                    <a href="Reparar.php">
+                        <i class="fa-solid fa-hammer"></i>
+                        Reparar
+                    </a>
 
-<li class="item-menu">
-    <a href="#" onclick="abrirInicio()">
-        <span class="icones"> <i class="bi bi-wrench"></i> </span>
-        <span class="txt-linck">Chamadas</span>
-    </a>
-</li>
+                    <a href="Funcionarios.php">
+                        <i class="fa-solid fa-user-group"></i>
+                        Funcionarios
+                    </a>
 
-<li class="item-menu">
-    <a href="#" onclick="abrirInicio()">
-        <span class="icones"> <i class="bi bi-calendar4"></i> </span>
-        <span class="txt-linck">Histórico</span>
-    </a>
-</li>
+                    <a href="Chamados.php">
+                        <i class="fa-solid fa-phone"></i>
+                        Chamados
+                    </a>
 
-<li class="item-menu">
-    <a href="#" onclick="abrirInicio()">
-        <span class="icones"> <i class="bi bi-people-fill"></i> </span>
-        <span class="txt-linck">Equipe</span>
-    </a>
-</li>
+                    <div class="inferior">
+                        <a href="Conta.php" id="selecionado">
+                            <i class="fa-solid fa-user"></i>
+                            Conta
+                        </a>
+                        <a href="Conta.php">
+                            <i class="fa-solid fa-arrow-right-from-bracket" ></i>
+                            Sair
+                        </a>
+                    </div>
+                </nav>
+            </header>
+        
+            <div id="conta">
+                <main>
+                    <h1>Configurações da Conta</h1>
+                    <div id="info_basicas">
+                        <h2>Informações basicas</h2>
+                        <div id="foto_perfil">
+                            <h2>Foto de perfil</h2>
+                            <div id="imagem">
+                                <div id="img">
+                                    <img src="uploads/anexo_692f02ad25e2d.jpg" alt="">
+                                </div>
+                                <div id="img_text">
+                                    <p>Enviar nova foto</p>
+                                    <p><strong>Redefinir</strong></p>
+                                </div>
+                            </div>
+                        </div>
+                        <!--Nome-->
+                        <div class="linha"></div>
+                        <div class="info">
+                            <h2>Nome</h2>
+                            <p><?php echo $_SESSION['usuario_nome']?></p>
+                            <i class="fa-solid fa-angle-right"></i>
+                        </div>
+                        <!--Contato-->
+                        <div class="linha"></div>
+                        <div class="info">
+                            <h2>Contato</h2>
+                            <p><?php echo $usuario['contato']?></p>
+                            <i class="fa-solid fa-angle-right"></i>
+                        </div>
+                        <div class="linha"></div>
+                    </div>
 
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
+                    <div id="info_conta">
+                        <h2>Informações de conta</h2>
+                        
 
-<!--ICONES DE BAIXO (PERFIL E SAÍDA)-->
+                        <!--E-mail-->
 
-<li class="item-menu2">
-    <a href="#" onclick="abrirInicio()"> <!--# Vazio-->
-        <span class="icones"> <i class="bi bi-person-circle"></i></span>
-        <span class="txt-linck">Perfil</span>
-    </a>
-</li>
+                        <div class="info">
+                            <h2>Email</h2>
+                            <p><?php echo $usuario['email']?></p>
+                            <i class="fa-solid fa-angle-right"></i>
+                        </div>
+                        <div class="linha"></div>
+                        <!--Contato-->
+                        <div class="info">
+                            <h2>Senha</h2>
+                            <p><?php echo $usuario['senha_hash']?></p>
+                            <i class="fa-solid fa-angle-right"></i>
+                        </div>
+                        <div class="linha"></div>
+                    </div>
+                    </div>
+                </main>
+            </div>
+        </div>
 
-<br>
-
-<li class="item-menu2">
-    <a href="#" onclick="abrirInicio()" > <!--# Vazio-->
-        <span class="icones"> <i class="bi bi-box-arrow-right"></i> </span>
-        <span class="txt-linck">Sair</span>
-    </a>
-</li>
-</ul>
-                <h1>Testado 123...</h1>
-             </nav> <!--Fecha o negocio do menu lateral-->
-<!------------------------------------FIM DA BARRA LATERAL------------------------------------------------------------->
-            
-
-</main>
-</body>
+        <script src="js/Chamados.js"></script>
+    </body>
+</html>
