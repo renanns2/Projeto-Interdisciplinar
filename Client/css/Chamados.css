@@ -37,16 +37,18 @@ main > h2 {
 
   display: flex;
   flex-direction: column;
-  gap: 25px;
+  gap: 20px;
 }
 
 #order {
-  background-color: #191A20;
   display: flex;
   flex-direction: column;
   align-items: center;
 
   border-radius: 20px;
+
+  color: white;
+  font-weight: 600;
 }
 
 #ordenar, .chamado {
@@ -57,7 +59,70 @@ main > h2 {
   flex-direction: row;
   align-items: center;
   padding: 15px 35px;
+  gap: 30px;
 }
+
+#status, #tipo, #data {
+  background-color: #31323E;
+  padding: 5px;
+
+  border: 0px solid;
+  border-radius: 10px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+#status.menu_selecionado,
+#tipo.menu_selecionado,
+#data.menu_selecionado {
+  border: 2px solid rgb(121, 121, 121)
+}
+
+.ordenar_btn {
+  color: #fff;
+  font-size: 1.1em;
+  font-weight: 500;
+}
+
+.ordenar-menu {
+  display: none;
+  gap: 10px;
+}
+
+.ordenar-menu > a {
+  color: #fff;
+
+  background-color: #1d1d23;
+  padding: 5px;
+  border: 2px solid #191a20;
+  border-radius: 10px;
+  text-decoration: none;
+
+  transition: background-color 0.3s ease-in-out;
+}
+
+.ordenar-menu > a:hover {
+  color: #fff;
+
+  background-color: #10102e;
+  padding: 5px;
+  border: 2px solid #191a20;
+  border-radius: 10px;
+  text-decoration: none;
+}
+
+
+.ordenar-menu.ativado {
+  display: flex;
+  flex-direction: column;
+  color: #fff;
+  font-size: 0.97em;
+  font-weight: 500;
+}
+
 
 .chamado {
   color: white;
@@ -65,12 +130,19 @@ main > h2 {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  gap: 30px;
 
-  transition: transform 0.3s ease-in-out;
+  transition: padding 0.3s ease-in-out, background-color 0.3s ease-in-out;
 }
 
 .chamado:hover {
-  transform: scale(1.05);
+  padding: 25px 40px; /* aumenta sem quebrar o layout */
+  background-color: #1e1f28;
+}
+
+.chamado.expandido {
+  padding: 25px 40px; /* aumenta sem quebrar o layout */
+  background-color: #1e1f28;
 }
 
 .info {
@@ -117,6 +189,12 @@ main > h2 {
   width: 50%;
 }
 
+.divisoria_esq_dir {
+  width: 100%;
+  height: 2px;
+  background-color: white;
+}
+
 .detalhes {
   display: none;
 }
@@ -125,11 +203,25 @@ main > h2 {
   display: flex;
   width: 100%;
   height: 100%;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .detalhes_info {
   height: 100%;
   width: 100%;
+  background-color: #31323e;
+  border-radius: 20px; 
+  padding: 15px;
+
+  gap: 30px;
+  display: flex;
+  flex-direction: column;
+}
+
+.detalhes_info > p {
+  font-weight: 600;
+  font-size: 1.2em;
 }
 
 .gerais_especificas {
@@ -137,10 +229,59 @@ main > h2 {
   flex-direction: row;
 }
 
+.gerais, .especificas {
+  text-align: left;
+}
+
+.gerais > h1, 
+.especificas > h1 {
+  text-align: center;
+}
+
+.gerais > p, 
+.especificas > p {
+  font-size: 1.05em;
+}
+
 .gerais {
   width: 50%;
+  display: flex;
+  flex-direction: column;
+  gap: 1px; 
 }
 
 .especificas {
   width: 50%;
+  display: flex;
+  flex-direction: column;
+  gap: 1px; 
+}
+
+.descricao > p {
+  font-size: 1.1em;
+  background-color: #191a20;
+  border-radius: 8px;
+  min-height: 3em;
+  height: auto;
+  text-align: center;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  padding: 8px;
+}
+
+.anexo > p {
+  font-size: 1.1em;
+  background-color: #191a20;
+  border-radius: 40px;
+  min-height: 3em;
+  height: auto;
+  text-align: center;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  padding: 20px;
+}
+
+.anexo > p > img {
+  width: 100%;
+  border-radius: 20px;
 }

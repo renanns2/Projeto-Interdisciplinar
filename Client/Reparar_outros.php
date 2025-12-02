@@ -224,7 +224,7 @@
 
                         <div class="grupo-input" id="outro_input">
                             <label for="tipo_personalizado" id="outroTexto">Especifique:</label>
-                            <input type="text" id="tipo_personalizado" name="tipo_personalizado" placeholder="Digite um tipo especifico aqui.">
+                            <input type="text" id="tipo_personalizado" name="tipo_personalizado" placeholder="Digite um tipo especifico aqui." maxlength="100">
                         </div>
 
                         <div class="grupo-input">
