@@ -49,7 +49,7 @@ main > h2 {
   border-radius: 20px;
 }
 
-#ordenar, #chamado {
+#ordenar, .chamado {
   background-color: #191A20;
   border-radius: 20px;
 
@@ -59,29 +59,88 @@ main > h2 {
   padding: 15px 35px;
 }
 
-#chamado {
+.chamado {
   color: white;
+  border: 0px solid;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  transition: transform 0.3s ease-in-out;
 }
 
-#chamado > #esquerda h1 {
+.chamado:hover {
+  transform: scale(1.05);
+}
+
+.info {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  height: 100%;
+  width: 100%;
+  gap: 30px;
+}
+
+.info > .esquerda, .direita {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.info > .esquerda h1 {
   font-size: 1.7em;
   font-weight: 500;
 }
 
-#chamado > #esquerda h2 {
+.info > .esquerda h2 {
   font-size: 1.2em;
   font-weight: 500;
   color: #B80B0B;
 }
 
-#chamado > #esquerda p {
+.info > .esquerda p {
   color: #ffffffab;
 }
 
-#chamado > #esquerda {
+.info > .esquerda {
+  width: 70%;
+}
+
+.info > .divisoria {
+  width: 2px;
+  height: 100%;
+  background-color: #fff;
+}
+
+.info > .direita {
   width: 50%;
 }
 
-#chamado > #direita {
+.detalhes {
+  display: none;
+}
+
+.detalhes.expandido {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+.detalhes_info {
+  height: 100%;
+  width: 100%;
+}
+
+.gerais_especificas {
+  display: flex;
+  flex-direction: row;
+}
+
+.gerais {
+  width: 50%;
+}
+
+.especificas {
   width: 50%;
 }
