@@ -16,3 +16,26 @@ btns.forEach(botao => {
         }
     })
 })
+
+const inputs = document.querySelectorAll('#formConta .botaooculto input');
+const barra = document.getElementById('barra-confirmacao');
+
+function verificarAlteracoes() {
+    let temAlteracao = false;
+
+    inputs.forEach(input => {
+        if (input.value.trim() !== "") {
+            temAlteracao = true;
+        }
+
+        if (temAlteracao) {
+            barra.classList.add('visivel');
+        }else {
+            barra.classList.remove('visivel');
+        }
+    })
+}
+
+inputs.forEach(input => {
+    input.addEventListener('input', verificarAlteracoes);
+})

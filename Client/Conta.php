@@ -19,6 +19,38 @@
     }else {
         echo 'Ocorreu um erro.';
     }
+
+    if ($_SERVER['REQUEST_METHOD'] === "POST") {
+        $nome = $_POST['nomeusuario'] ?? "";
+        $contato = $_POST['contato'] ?? "";
+        $email = $_POST['email'] ?? "";
+        $senha = $_POST['senha'] ?? "";
+
+        include_once("config.php");
+
+        if (!empty($nome))  {
+            $sql = "UPDATE usuarios SET nome_completo = '$nome' WHERE ID = '$id_user';";
+            $resultado = $con->query($sql);
+
+            $_SESSION['usuario_nome'] = $nome;
+        }
+
+        if (!empty($contato)) {
+            $sql = "UPDATE usuarios SET contato = '$contato' WHERE ID = '$id_user';";
+            $resultado = $con->query($sql);
+        }
+        
+        if (!empty($email)) {
+            $sql = "UPDATE usuarios SET email = '$email' WHERE ID = '$id_user';";
+            $resultado = $con->query($sql);
+        }
+
+        if (!empty($senha)) {
+            $sql = "UPDATE usuarios SET email = '$email' WHERE ID = '$id_user';";
+            $resultado = $con->query($sql);
+        }
+
+    }
 ?>
 
 <!DOCTYPE html>
@@ -75,72 +107,80 @@
             <div id="conta">
                 <main>
                     <h1>Configurações da Conta</h1>
-                    <div id="info_basicas">
-                        <h2>Informações basicas</h2>
-                        <div id="foto_perfil">
-                            <h2>Foto de perfil</h2>
-                            <div id="imagem">
-                                <div id="img">
-                                    <img src="uploads/anexo_692f02ad25e2d.jpg" alt="">
-                                </div>
-                                <div id="img_text">
-                                    <p>Enviar nova foto</p>
-                                    <p><strong>Redefinir</strong></p>
+                    <form action="Conta.php" method="POST" id="formConta">
+                        <div id="info_basicas">
+                            <h2>Informações basicas</h2>
+                            <div id="foto_perfil">
+                                <h2>Foto de perfil</h2>
+                                <div id="imagem">
+                                    <div id="img">
+                                        <img src="uploads/anexo_692f02ad25e2d.jpg" alt="">
+                                    </div>
+                                    <div id="img_text">
+                                        <p>Enviar nova foto</p>
+                                        <p><strong>Redefinir</strong></p>
+                                    </div>
                                 </div>
                             </div>
+                            <!--Nome-->
+                            <div class="linha"></div>
+                            <button type="button" class="info">
+                                <h2>Nome</h2>
+                                <p><?php echo $_SESSION['usuario_nome']?></p>
+                                <i class="fa-solid fa-angle-right"></i>
+                            </button>
+                            <div class="botaooculto">
+                                <h2>Digite um novo nome: </h2>
+                                <input type="text" name="nomeusuario" id="nomeusuario">
+                            </div>
+                            <!--Contato-->
+                            <div class="linha"></div>
+                            <button type="button" class="info">
+                                <h2>Contato</h2>
+                                <p><?php echo $usuario['contato']?></p>
+                                <i class="fa-solid fa-angle-right"></i>
+                            </button>
+                            <div class="botaooculto">
+                                <h2>Informe um email ou número de contato:</h2>
+                                <input type="text" name="contato" id="contato">
+                            </div>
+                            <div class="linha"></div>
                         </div>
-                        <!--Nome-->
-                        <div class="linha"></div>
-                        <button class="info">
-                            <h2>Nome</h2>
-                            <p><?php echo $_SESSION['usuario_nome']?></p>
-                            <i class="fa-solid fa-angle-right"></i>
-                        </button>
-                        <div class="botaooculto"> 
-                            <h2>Digite um novo nome: </h2>
-                            <input type="text">
-                        </div>
-
-                        <!--Contato-->
-                        <div class="linha"></div>
-                        <button class="info">
-                            <h2>Contato</h2>
-                            <p><?php echo $usuario['contato']?></p>
-                            <i class="fa-solid fa-angle-right"></i>
-                        </button>
-                        <div class="botaooculto"> 
-                            <h2>Informe um email ou número de contato:</h2>
-                            <input type="text">
-                        </div>
-                        <div class="linha"></div>
-                    </div>
-
-                    <div id="info_conta">
-                        <h2>Informações de conta</h2>
+                        <div id="info_conta">
+                            <h2>Informações de conta</h2>
                         
-
-                        <!--E-mail-->
-
-                        <button class="info">
-                            <h2>Email</h2>
-                            <p><?php echo $usuario['email']?></p>
-                            <i class="fa-solid fa-angle-right"></i>
-                        </button>
-                        <div class="botaooculto"> 
-                            <h2>Informe um email ou número de contato:</h2>
-                            <input type="text">
+                            <!--E-mail-->
+                            <button type="button" class="info">
+                                <h2>Email</h2>
+                                <p><?php echo $usuario['email']?></p>
+                                <i class="fa-solid fa-angle-right"></i>
+                            </button>
+                            <div class="botaooculto">
+                                <h2>Informe um email novo:</h2>
+                                <input type="text" name="email" id="email">
+                            </div>
+                            <div class="linha"></div>
+                            <!--Contato-->
+                            <button type="button" class="info">
+                                <h2>Senha</h2>
+                                <p><?php echo $usuario['senha_hash']?></p>
+                                <i class="fa-solid fa-angle-right"></i>
+                            </button>
+                            <div class="botaooculto">
+                                <h2>Informe uma senha nova:</h2>
+                                <input type="text" name="senha" id="senha">
+                            </div>
+                            <div class="linha"></div>
                         </div>
-                        <div class="linha"></div>
-                        <!--Contato-->
-                        <button class="info">
-                            <h2>Senha</h2>
-                            <p><?php echo $usuario['senha_hash']?></p>
-                            <i class="fa-solid fa-angle-right"></i>
-                        </button>
-                        <div class="linha"></div>
-                    </div>
-                    </div>
+                    </form>
                 </main>
+
+                <div id="barra-confirmacao">
+                        <p id="textoAlteracao">Cuidado - Você tem alterações não salvas!</p>
+
+                        <button type="button" id="cancelarAlteracao">Cancelar</button>
+                        <button type="submit" form="formConta" id="Salvar">Salvar alterações</button>
+                </div>
             </div>
         </div>
 

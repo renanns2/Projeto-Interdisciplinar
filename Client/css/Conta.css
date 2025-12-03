@@ -2,6 +2,8 @@
     flex-direction: row;
     padding-bottom: 0;
     width: 70%;
+    min-height: 100vh;
+    position: relative;
 }
 
 header {
@@ -19,7 +21,7 @@ header > div > img {
     width: 100%;
 }
 
-header  nav {
+header nav {
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
@@ -69,19 +71,18 @@ header nav a i {
   width: 100%;
 }
 
-main {
+main, form {
   display: flex;
   flex-direction: column;
   align-items: center;
-  flex: 1;
-  height: 100%;
+  min-height: 100%;
 
   background-color: #272936;
   border-radius: 35px;
   width: 100%;
 
   padding: 30px;
-  gap: 8%;
+  gap: 30px;
 }
 
 p {
@@ -196,6 +197,9 @@ div.linha {
 .botaooculto {
     display: none;
     width: 100%;
+    opacity: 0;
+
+    transition: opacity 1s ease-in-out;
 }
 .botaooculto > h2 {
     font-size: 1em;
@@ -206,10 +210,10 @@ div.linha {
 
 .botaooculto > input {
     border: 0px;
-    border-bottom: 2px solid black;
+    border-bottom: 2px solid #A358FF;
     border-radius: 10px;
 
-    background-color: #10101B;
+    background-color: #272936;
     width: 50%;
     color: white;
     font-weight: 600;
@@ -219,6 +223,7 @@ div.linha {
 .botaooculto.ativado {
     display: flex;
     align-items: center;
+    opacity: 1;
 }
 
 i.fa-angle-right {
@@ -228,4 +233,51 @@ i.fa-angle-right {
 
 i.fa-angle-right.rotacionado {
     transform: rotate(90deg);
+}
+
+#barra-confirmacao {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    gap: 30px;
+
+    position: fixed;
+    bottom: 5%;
+    left: 50%;
+    transform: translateX(-50%) scale(0);
+    transform-origin: center center;
+
+    width: auto;
+    background-color: #10101B;
+    border-radius: 20px;
+    opacity: 0;
+    padding: 10px 20px;
+
+    transition: transform 0.3s ease-in-out;
+}
+
+#barra-confirmacao.visivel {
+    transform: translateX(-50%) scale(1);
+    opacity: 1;
+}
+
+#barra-confirmacao > p {
+    width: auto;
+    margin-right: 25px;
+}
+
+#cancelarAlteracao {
+    all: unset;
+    color: #12BACD;
+    font-size: 0.9em;
+}
+
+#Salvar {
+    padding: 9px;
+    border-radius: 10px;
+    border: 0px;
+    background-color: #116705c2;
+    color: #fff;
+    font-weight: 600;
 }
