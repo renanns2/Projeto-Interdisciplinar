@@ -91,17 +91,26 @@
                         </div>
                         <!--Nome-->
                         <div class="linha"></div>
-                        <div class="info">
+                        <button class="info">
                             <h2>Nome</h2>
                             <p><?php echo $_SESSION['usuario_nome']?></p>
                             <i class="fa-solid fa-angle-right"></i>
+                        </button>
+                        <div class="botaooculto"> 
+                            <h2>Digite um novo nome: </h2>
+                            <input type="text">
                         </div>
+
                         <!--Contato-->
                         <div class="linha"></div>
-                        <div class="info">
+                        <button class="info">
                             <h2>Contato</h2>
                             <p><?php echo $usuario['contato']?></p>
                             <i class="fa-solid fa-angle-right"></i>
+                        </button>
+                        <div class="botaooculto"> 
+                            <h2>Informe um email ou número de contato:</h2>
+                            <input type="text">
                         </div>
                         <div class="linha"></div>
                     </div>
@@ -112,18 +121,22 @@
 
                         <!--E-mail-->
 
-                        <div class="info">
+                        <button class="info">
                             <h2>Email</h2>
                             <p><?php echo $usuario['email']?></p>
                             <i class="fa-solid fa-angle-right"></i>
+                        </button>
+                        <div class="botaooculto"> 
+                            <h2>Informe um email ou número de contato:</h2>
+                            <input type="text">
                         </div>
                         <div class="linha"></div>
                         <!--Contato-->
-                        <div class="info">
+                        <button class="info">
                             <h2>Senha</h2>
                             <p><?php echo $usuario['senha_hash']?></p>
                             <i class="fa-solid fa-angle-right"></i>
-                        </div>
+                        </button>
                         <div class="linha"></div>
                     </div>
                     </div>
@@ -131,6 +144,6 @@
             </div>
         </div>
 
-        <script src="js/Chamados.js"></script>
+        <script src="js/Conta.js"></script>
     </body>
 </html>

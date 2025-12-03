@@ -100,7 +100,7 @@ main h2 {
     font-weight: 400;
 }
 
-#info_basicas, #info_conta {
+#info_basicas, #info_conta, #botaooculto {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -113,6 +113,16 @@ main h2 {
     flex-direction: row;
     align-items: center;
     width: 100%;
+}
+
+button.info {
+    all: unset;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    gap: 10px; 
+    cursor: pointer;
 }
 
 #foto_perfil > h2 {
@@ -181,4 +191,41 @@ div.linha {
     font-weight: 600;
     word-break: break-word; /* ou overflow-wrap: break-word; */
     white-space: normal; /* garante que quebre */
+}
+
+.botaooculto {
+    display: none;
+    width: 100%;
+}
+.botaooculto > h2 {
+    font-size: 1em;
+    font-weight: 500;
+    color: #d1d1d1;
+    width: 48.5%;
+}
+
+.botaooculto > input {
+    border: 0px;
+    border-bottom: 2px solid black;
+    border-radius: 10px;
+
+    background-color: #10101B;
+    width: 50%;
+    color: white;
+    font-weight: 600;
+    padding: 5px 10px
+}
+
+.botaooculto.ativado {
+    display: flex;
+    align-items: center;
+}
+
+i.fa-angle-right {
+    transition: transform 0.3s ease-in-out;
+
+}
+
+i.fa-angle-right.rotacionado {
+    transform: rotate(90deg);
 }

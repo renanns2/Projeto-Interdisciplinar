@@ -16,7 +16,7 @@
         $mensagens = [];
 
         if ($acao === 'registro') {
-            include_once "config.php"; 
+            include_once "Client/config.php"; 
             $email = $_POST['email'] ?? "";
             $senha = $_POST['senha'] ?? "";
             $nome = $_POST['nome'] ?? "";
@@ -230,7 +230,7 @@
                     <button onclick="ocultar();">Tentar novamente</button>
                 <!--Sucesso Login -->
                 <?php elseif ($status === 'sucesso' and $tipo === 'login') : ?>
-                    <button onclick="location.href='/Client/Inicio.php'">Continuar</button>
+                    <button onclick="location.href='Client/Inicio.php'">Continuar</button>
 
                 <!--Erro Registro -->
                 <?php elseif ($status === 'erro' and $tipo === 'registro') : ?>

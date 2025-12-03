@@ -78,11 +78,18 @@ main > h2 {
 #status.menu_selecionado,
 #tipo.menu_selecionado,
 #data.menu_selecionado {
-  border: 2px solid rgb(121, 121, 121)
+  border: 2px solid rgb(121, 121, 121);
+  background-color: #32344f;
+}
+
+#status.menu_selecionado .ordenar_btn,
+#tipo.menu_selecionado .ordenar_btn,
+#data.menu_selecionado .ordenar_btn {
+  color: #fff;
 }
 
 .ordenar_btn {
-  color: #fff;
+  color: #9C9C9C;
   font-size: 1.1em;
   font-weight: 500;
 }

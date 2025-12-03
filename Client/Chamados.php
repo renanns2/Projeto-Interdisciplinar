@@ -85,9 +85,12 @@
         <title>Reparar</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        
         <link rel="stylesheet" href="css/header.css">
         <link rel="stylesheet" href="css/config.css">
         <link rel="stylesheet" href="css/Chamados.css">
+
+        <script src="https://kit.fontawesome.com/de310c1571.js" crossorigin="anonymous"></script>
     </head>
     <body>
         <div id="pagina">
@@ -134,7 +137,7 @@
                             <div id="ordenar">
                                 <div id="status" <?php if ($status) {echo 'class="menu_selecionado"';}?>>
                                     <div class="ordenar_btn" data-menu="menu-status">
-                                        <img src="" alt="">
+                                        <i class="fa-solid fa-rotate"></i>
                                         Status
                                     </div>
                                     <div class="ordenar-menu" id="menu-status">
@@ -144,7 +147,7 @@
                                 </div>
                                 <div id="tipo" <?php if ($tipo) {echo 'class="menu_selecionado"';}?>>
                                     <div class="ordenar_btn" data-menu="menu-tipo">
-                                        <img src="" alt="">    
+                                        <i class="fa-solid fa-laptop"></i>  
                                         Tipo
                                     </div>
                                     <div class="ordenar-menu" id="menu-tipo">
@@ -155,7 +158,7 @@
 
                                 <div id="data" <?php if ($data) {echo 'class="menu_selecionado"';}?>>
                                     <div class="ordenar_btn" data-menu="menu-data">
-                                        <img src="" alt="">
+                                        <i class="fa-regular fa-clock"></i>
                                         Data
                                     </div>
                                     <div class="ordenar-menu" id="menu-data">
