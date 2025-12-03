@@ -74,9 +74,9 @@
         
             <div id="conta">
                 <main>
-                    <h1>Configurações da Conta</h1>
+                    <h1>Equipe</h1>
                     <div id="info_basicas">
-                        <h2>Informações basicas</h2>
+                        <h2>Conheça a nossa equipe de colaboradores á sua disposição</h2>
                         <div id="foto_perfil">
                             <h2>Foto de perfil</h2>
                             <div id="imagem">
