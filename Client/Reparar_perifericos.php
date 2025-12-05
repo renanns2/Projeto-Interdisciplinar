@@ -232,7 +232,7 @@
 
                         <div class="grupo-input">
                                 <label for="descricao">Descrição do problema</label>
-                                <textarea name="descricao" id="descricao" required placeholder="Ex: O monitor não está funcionando"></textarea>
+                                <textarea name="descricao" id="descricao" required placeholder="Ex: O teclado está com mal contato"></textarea>
                         </div>
 
                         <div class="duplaselecao">
