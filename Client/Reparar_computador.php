@@ -1,12 +1,6 @@
 <?php
-    session_start();
-
-    
-    if (!isset($_SESSION['usuario_id'])) {
-        // se não tiver uma sessão ativa, voltar para o login
-        header("Location: ../login_registro.php?painel=login");
-    }
-    
+    require_once(__DIR__ . '/../Config/auth.php');
+    require_once(__DIR__ . '/../Config/redirectadmin.php');
 
     $mensagens = [];
 
@@ -14,13 +8,13 @@
     $tipos_permitidos = ['image/jpeg', 'image/png', 'image/jpg'];
 
     if ($_SERVER["REQUEST_METHOD"] === "POST") {
-        $numeropc = $_POST["numeropc"] ?? "";
+        $numeropc = intval($_POST["numeropc"]) ?? "";
         $setor_lab = $_POST["setor_lab"] ?? "";
         $descricao = $_POST["descricao"] ?? "";
         $data = $_POST["data_ocorrido"] ?? "";
         $urgencia = $_POST["urgencia"] ?? "";
 
-        $anexo = $_FILES["anexo"];
+        $anexo = $_FILES["anexo"] ?? "";
         
         $arquivo_final = null;
 
@@ -42,7 +36,7 @@
                 }else if (!in_array($anexo['type'], $tipos_permitidos)){
                     $mensagens[] = [
                         'status' => 'erro',
-                        'mensagem' => 'Ocorreu um erro no tipo do arquivo do arquivo. Codigo: ' . $anexo['error'],
+                        'mensagem' => 'Essa imagem não está entre os tipos permitidos. Codigo: ' . $anexo['error'],
                     ];
                     
                     $anexo = null;
@@ -50,7 +44,7 @@
                 }else {
                     $ext = pathinfo($anexo['name'], PATHINFO_EXTENSION); // pegar a extensão da imagem(jpg ou png, etc.)
                     $arquivo_final = uniqid("anexo_") . "." . $ext; // criar um id unico depois de anexo_(id unico) e concatenar com a variavel de ponto final do arquivo.
-                    move_uploaded_file($anexo['tmp_name'], "uploads/". $arquivo_final); // o PHP cria um arquivo de nome temporario ate o arquivo ser movido, e esse é mracado pelo "tmp_name". Nós estamos movendo esse arquivo para "uploads/", e colocando o nome dele final.
+                    move_uploaded_file($anexo['tmp_name'], "../uploads/foto_chamados/". $arquivo_final); // o PHP cria um arquivo de nome temporario ate o arquivo ser movido, e esse é mracado pelo "tmp_name". Nós estamos movendo esse arquivo para "uploads/", e colocando o nome dele final.
                 }
             //Se tem 
             // se o upload deu errado
@@ -106,7 +100,6 @@
 
         //Inserir no banco
         if (!$erros) {
-            include_once "config.php";
             $solicitante = $_SESSION['usuario_nome'];
             $id_solicitante = $_SESSION['usuario_id'];
 

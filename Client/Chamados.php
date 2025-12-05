@@ -1,25 +1,20 @@
 <?php
-    session_start();
-
-    /*
-    if (!isset($_SESSION['usuario_id'])) {
-        // se não tiver uma sessão ativa, voltar para o login
-        header("Location: ../login_registro.php?painel=login");
-    }
-    */
+    require_once(__DIR__ . '/../Config/auth.php');
+    require_once(__DIR__ . '/../Config/redirectadmin.php');
 
     $id = '';
     $tipo = '';
     $periferico = '';
     $msg = '';
-    $id_user = intval($_SESSION['usuario_id']);
     
     $status = false;
     $tipo = false;
     $data = false;
 
-    include_once "config.php";
     $ordenar = $_GET['ordenar'] ?? "";
+
+    $mensagens = $_SESSION['mensagens'] ?? [];
+    unset($_SESSION['mensagens']);
     
     if(!empty($ordenar)) {
         //Status
@@ -61,19 +56,42 @@
         
         //Data
         if ($ordenar === 'data_asc') {
-            $sql = "SELECT * FROM chamados WHERE ID_Solicitante = ". $id_user . " ORDER BY data_ocorrido DESC";
+            $sql = "SELECT * FROM chamados WHERE ID_Solicitante = ". $id_user . " ORDER BY data_ocorrido DESC, ID DESC";
             $data = true;
         }
         if ($ordenar === 'data_desc') {
-            $sql = "SELECT * FROM chamados WHERE ID_Solicitante = ". $id_user . " ORDER BY data_ocorrido ASC";
+            $sql = "SELECT * FROM chamados WHERE ID_Solicitante = ". $id_user . " ORDER BY data_ocorrido ASC, ID ASC";
             $data = true;
         }
 
     }else {
-        $sql = "SELECT * FROM chamados WHERE ID_Solicitante = ". $id_user . " ORDER BY data_ocorrido DESC";
+        $sql = "SELECT * FROM chamados WHERE ID_Solicitante = ". $id_user . " ORDER BY ID DESC";
     }
 
+    //Se veio com metodo POST -> quer excluir o chamado
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $id_pedido = $_POST['id_chamado'] ?? "";
+        $tipo_chamado = $_POST['tipo_chamado'] ?? "";
 
+        if ($tipo_chamado === 'computador') {
+            $sql_rmv = "DELETE FROM chamado_computador WHERE id_chamado = $id_pedido";
+            $remover = $con->query($sql_rmv);
+        }
+        if ($tipo_chamado === 'outros') {
+            $sql_rmv = "DELETE FROM chamado_outros WHERE id_chamado = $id_pedido";
+            $remover = $con->query($sql_rmv);
+        }
+        if ($tipo_chamado === 'perifericos') {
+            $sql_rmv = "DELETE FROM chamado_perifericos WHERE id_chamado = $id_pedido";
+            $remover = $con->query($sql_rmv);
+        }
+
+        $sql_rmv = "DELETE FROM chamados WHERE id = $id_pedido";
+        $remover = $con->query($sql_rmv);
+
+    }
+
+    
 
     $resultado = $con->query($sql);
 
@@ -171,7 +189,7 @@
 
                         <?php if ($resultado->num_rows > 0): ?>
                             <?php foreach ($resultado as $res): ?>
-                                <button class="chamado">
+                                <div class="chamado" tabindex="0">
                                     <div class="info">
                                         <div class="esquerda">
                                             <h1>
@@ -263,27 +281,42 @@
                                             </div>
 
                                             <div class="descricao">
-                                                <h2>Descricao: </h2>
+                                                <h2>Descricao </h2>
                                                 <p><?php echo $res['descricao']?></p>
                                             </div>
 
                                             <div class="anexo">
-                                                <h2>Anexo: </h2>
+                                                <h2>Anexo </h2>
                                                 <p>
                                                     <?php
                                                     if (!empty($res['anexo'])) {
                                                         $src = $res['anexo'];
-                                                        echo '<img src="uploads/' . $src . '" alt="Imagem Anexo">';
+                                                        echo '<img src="../uploads/foto_chamados/' . $src . '" alt="Imagem Anexo">';
                                                     }else {
                                                         echo 'Nenhuma imagem encontrada.';
                                                     }
                                                     ?>
                                                 </p>
                                             </div>
-                                            
+
+                                            <div class="excluir">
+                                                <h2>EXCLUIR</h2>
+                                                <button class="excluir_confirm">Clique aqui para excluir o pedido</button>
+                                                <form action="Chamados.php" method="post">
+                                                    <div class="botaooculto">
+                                                        <h2>Tem certeza?</h2>
+                                                        <div class="btns">
+                                                            <input type="hidden" name="id_chamado" id="id_chamado" value="<?php echo $res['ID']?>">
+                                                            <input type="hidden" name="tipo_chamado" id="tipo_chamado" value="<?php echo $res['tipo']?>">
+                                                            <button class="sim" type="submit">Sim</button>
+                                                            <button class="nao" type="button">Não</button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
                                         </div>
                                     </div>                                
-                                </button>
+                                </div>
                             <?php endforeach?>
                         <?php else:?>
                             <p>Nenhum chamado.</p>

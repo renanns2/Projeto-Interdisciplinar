@@ -1,13 +1,6 @@
 <?php
-
-    session_start();
-
-    /*
-    if (!isset($_SESSION['usuario_id'])) {
-        // se não tiver uma sessão ativa, voltar para o login
-        header("Location: ../login_registro.php?painel=login"");
-    }
-    */
+    require_once(__DIR__ . '/../Config/auth.php');
+    require_once(__DIR__ . '/../Config/redirectadmin.php');
 ?>
 
 <head>

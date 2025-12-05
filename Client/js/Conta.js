@@ -1,3 +1,5 @@
+
+//Codigo de abrir os botões ocultos (Menu Dropdown)
 const btns = document.querySelectorAll('.info');
 let img_ativa = false;
 
@@ -18,28 +20,44 @@ btns.forEach(botao => {
     })
 })
 
+// Codigo pra abrir o menu de salvar modificações
 const inputs = document.querySelectorAll('#formConta .botaooculto input');
+const selects = document.querySelectorAll('#formConta .botaooculto select');
 const barra = document.getElementById('barra-confirmacao');
-
-function verificarAlteracoes() {
-    let temAlteracao = false;
-
-    inputs.forEach(input => {
-        if (input.value.trim() !== "") {
-            temAlteracao = true;
-        }
-
-        if (temAlteracao || img_ativa) {
-            barra.classList.add('visivel');
-        }else {
-            barra.classList.remove('visivel');
-        }
-    })
-}
 
 inputs.forEach(input => {
     input.addEventListener('input', verificarAlteracoes);
 })
+selects.forEach(select => {
+    select.addEventListener('change', verificarAlteracoes);
+})
+
+// Função de verificar as alterações e acionar a barra
+function verificarAlteracoes() {
+    let temAlteracao = false;
+
+    // se input for diferente de nada
+    inputs.forEach(input => {
+        if (input.value.trim() !== "") {
+            temAlteracao = true;
+        }
+    })
+
+    // se select for diferente doq começou
+    selects.forEach(select => {
+        let valorAtual = select.dataset.original;
+        if (select.value !== valorAtual) {
+            temAlteracao = true;
+        }
+    })
+
+    // se teve alteração ou a img ta ativa
+    if (temAlteracao || img_ativa) {
+        barra.classList.add('visivel');
+    }else {
+        barra.classList.remove('visivel');
+    }
+}
 
 // Preview e mandar imagem
 const texto = document.getElementById('abrirUpload');
@@ -70,13 +88,15 @@ function previewImg () {
 
 //botao redefinir
 const redefinir = document.getElementById('redefinir');
+const redefinir_hidden = document.getElementById('redefinir_hidden');
 redefinir.addEventListener('click', () => {
-    const imagemPadrao = "uploads/SemFoto.jpg";
+    const imagemPadrao = "../uploads/foto_perfil/SemFoto.jpg";
     foto_perfil.src = imagemPadrao;
     img_ativa = true;
     verificarAlteracoes();
-    inputFile.value = "";
+    input.value = "";
     verificarAlteracoes();
+    redefinir_hidden.value = 1;
 })
 
 // botao cancelar
@@ -89,7 +109,6 @@ cancelar.addEventListener('click', () => {
     inputs.forEach(input => {
         input.value = "";
     })
-    temAlteracao = false;
     verificarAlteracoes();
 
     //fechar menus abertos

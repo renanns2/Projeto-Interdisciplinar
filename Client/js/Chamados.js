@@ -12,6 +12,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
         chamado.classList.toggle('expandido');
     });
+
+    const excluir = chamado.querySelector('.excluir_confirm');
+    const divOculta = chamado.querySelector('.botaooculto');
+    const sim = chamado.querySelector('.sim');
+    const nao = chamado.querySelector('.nao');
+
+    excluir.addEventListener('click', (e) => {
+      //Mostra elemento oculto
+      e.stopPropagation();
+      divOculta.classList.add('ativado');
+    })
+
+    sim.addEventListener('click', (e) => {
+      e.stopPropagation();
+    })
+
+    nao.addEventListener('click', (e) => {
+      e.stopPropagation();
+      divOculta.classList.remove('ativado');
+    })
+
+
   });
 
   const status = document.getElementById('status');
@@ -26,6 +48,5 @@ document.addEventListener('DOMContentLoaded', () => {
     const ordenar_menu = e.currentTarget.querySelector('.ordenar-menu');
     ordenar_menu.classList.toggle('ativado');
   }
-
 });
 

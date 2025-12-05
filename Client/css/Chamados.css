@@ -231,6 +231,11 @@ main > h2 {
   font-size: 1.2em;
 }
 
+.detalhes_info  h2{ 
+  text-align: center;
+}
+
+
 .gerais_especificas {
   display: flex;
   flex-direction: row;
@@ -291,4 +296,68 @@ main > h2 {
 .anexo > p > img {
   width: 100%;
   border-radius: 20px;
+}
+
+.excluir {
+  padding-right: 15px;
+  width: 100%;
+}
+.excluir h2 {
+  color: red;
+  text-align: center;
+}
+
+.excluir button {
+  all:unset;
+  font-size: 1.1em;
+  background-color: #191a20;
+  border-radius: 999px;
+  min-height: 2em;
+  width: 100%;
+  text-align: center;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  padding: 8px;
+
+}
+
+.botaooculto {
+    display: none;
+    width: 100%;
+    opacity: 0;
+
+    transition: opacity 1s ease-in-out;
+}
+
+.botaooculto.ativado{
+  display: flex;
+  opacity: 1;
+  font-size: 1em;
+  gap: 30px;
+  margin-top: 2%;
+}
+
+.botaooculto.ativado h2 {
+  color: white;
+  display: flex;
+  text-align: left;
+  align-items: center;
+}
+
+.btns {
+  width: 21%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.botaooculto.ativado button {
+  width: auto;
+  padding: 4px 8px;
+  transition: transform 0.3s ease-in-out;
+  border-radius: 8px;
+}
+
+.botaooculto.ativado button:hover {
+  transform: scale(1.1);
 }

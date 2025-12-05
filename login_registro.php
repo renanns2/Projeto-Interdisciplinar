@@ -16,7 +16,7 @@
         $mensagens = [];
 
         if ($acao === 'registro') {
-            include_once "Client/config.php"; 
+            include_once "Config/config.php"; 
             $email = $_POST['email'] ?? "";
             $senha = $_POST['senha'] ?? "";
             $nome = $_POST['nome'] ?? "";
@@ -91,7 +91,7 @@
             }
             
         }else  if ($acao === 'login') {
-            include_once "Client/config.php";
+            include_once "Config/config.php";
 
             $email = $_POST['email'] ?? ''; 
             $senha = $_POST['senha'] ?? '';
@@ -317,7 +317,7 @@
                 <div class="grupo-input"> 
                     <label for="cargo">Selecione um cargo</label>
                     <select name="cargo" id="cargo">
-                        <option value="cliente">Requisitante</option>
+                        <option value="requisitante">Requisitante</option>
                         <option value="admin">Admin</option>
                     </select>
                 </div>

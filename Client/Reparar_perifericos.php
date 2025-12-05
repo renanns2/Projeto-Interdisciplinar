@@ -1,12 +1,6 @@
 <?php
-    session_start();
-
-    /*
-    if (!isset($_SESSION['usuario_id'])) {
-        // se não tiver uma sessão ativa, voltar para o login
-        header("Location: ../login_registro.php?painel=login");
-    }
-    */
+    require_once(__DIR__ . '/../Config/auth.php');
+    require_once(__DIR__ . '/../Config/redirectadmin.php');
 
     $mensagens = [];
 
@@ -52,7 +46,7 @@
                 }else {
                     $ext = pathinfo($anexo['name'], PATHINFO_EXTENSION); // pegar a extensão da imagem(jpg ou png, etc.)
                     $arquivo_final = uniqid("anexo_") . "." . $ext; // criar um id unico depois de anexo_(id unico) e concatenar com a variavel de ponto final do arquivo.
-                    move_uploaded_file($anexo['tmp_name'], "uploads/". $arquivo_final); // o PHP cria um arquivo de nome temporario ate o arquivo ser movido, e esse é mracado pelo "tmp_name". Nós estamos movendo esse arquivo para "uploads/", e colocando o nome dele final.
+                    move_uploaded_file($anexo['tmp_name'],  "../uploads/foto_chamados/". $arquivo_final); // o PHP cria um arquivo de nome temporario ate o arquivo ser movido, e esse é mracado pelo "tmp_name". Nós estamos movendo esse arquivo para "uploads/", e colocando o nome dele final.
                 }
             //Se tem 
             // se o upload deu errado
@@ -111,7 +105,6 @@
 
         //Inserir no banco
         if (!$erros) {
-            include_once "config.php";
             $solicitante = $_SESSION['usuario_nome'];
             $id_solicitante = $_SESSION['usuario_id'];
 
