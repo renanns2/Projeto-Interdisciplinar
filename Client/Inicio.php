@@ -54,12 +54,7 @@
                     <h1>Bem Vindo</h1>
                     <h2>Comece a reparar o seu PC com a gente! <br> A melhor opção na sua INTRANET.</h2>
                     <p>
-                        Lorem ipsum lozaddwa moasdlamsldmasdkdfgdfmglkmdfmlgk
-                        dfmkglmdflgmldkfmkgsmdfkldmslkfmsklmflksdmfklsmdfkmk
-                        Lorem ipsum lozaddwa moasdlamsldmasdkdfgdfmglkmdfmlgk
-                        dfmkglmdflgmldkfmkgsmdfkldmslkfmsklmflksdmfklsmdfkmk
-                        Lorem ipsum lozaddwa moasdlamsldmasdkdfgdfmglkmdfmlgk
-                        dfmkglmdflgmldkfmkgsmdfkldmslkfmsklmflksdmfklsmdfkmk
+                        Registre peças danificadas, solicite análises, peça ajustes e acompanhe todo o processo. Também é possível acionar os técnicos disponíveis, definir o nível de urgência do seu pedido e monitorar o andamento até a conclusão do serviço. Torne sua experiência ainda mais rápida, prática e objetiva.
                     </p>
                     
                         <div id="botoes">   
