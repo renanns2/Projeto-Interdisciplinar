@@ -86,11 +86,12 @@ main {
   display: flex; 
   flex-direction: column; 
   width: 100%;
-  gap:3vh;
+  gap:1.5vh;
 }
 
 .linha.header {
   font-weight: 700;
+  margin-bottom: 3vh;
 }
 .linha.header:hover {
   transform: scale(1);
@@ -120,15 +121,44 @@ main {
   word-break: break-word; /* ESSENCIAL */
 }
 
-.baixa, .Aberto {
+/* Animação imagem */
+.chamado {
+  position: relative;
+  overflow: hidden;
+  z-index: 2;
+  transition: 0.3s ease;
+}
+
+.mascara-imagem {
+  position: absolute;
+  inset: 0;
+  background-image: url('../img/efeito_hover.png');
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transform: scale(1.2);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  z-index: -5;
+}
+.chamado:hover .mascara-imagem {
+  opacity: 0.5;
+  transform: scale(1);
+}
+.mascara-imagem.ativo {
+  opacity: 0.5;
+  transform: scale(1);
+}
+
+
+.baixa, .Aberto, .Concluido {
   color: #1FB80B;
 }
 
-.media {
+.media, .Em.andamento {
   color: #FFBB00;
 }
 
-.alta {
+.alta, .Não.resolvido, .Cancelado, .Incompleto, .Negado {
   color: #B80B0B;
 }
 
@@ -200,3 +230,31 @@ main {
   width: 100%;
   border-radius: 20px;
 }
+
+form {
+  display: flex;
+  gap: 3vh;
+}
+form button {
+  all: unset;
+  padding: 10px;
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.3s ease-in-out;
+}
+.acoes > form > button:hover {
+  transform: scale(1.1);
+}
+
+button.assumir {
+  width: 20%;
+  background-color: #174111;
+}
+
+button.negar {
+  width: 10%;
+  background-color: #411111
+}
+

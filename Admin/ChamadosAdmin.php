@@ -10,6 +10,31 @@
     $sql = "SELECT * FROM chamados";
     $resultado = $con->query($sql);
     $chamados = $resultado->fetch_all(MYSQLI_ASSOC);
+
+//Se veio aqui por um formulario
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $id_pedido = intval($_POST['id_pedido']);
+        $acao = $_POST['acao'] ?? "";
+        $tecnico = $_SESSION['usuario_nome'];
+
+        if ($acao === 'assumir') {
+            $sql = "UPDATE chamados SET status = 'Em andamento', tecnico_responsavel = '$tecnico' WHERE ID = '$id_pedido';";
+            $result = $con->query($sql);
+            $mensagens[] = [
+                'tipo' => 'sucesso',
+                'mensagem' => 'Chamado assumido com sucesso!',
+            ];
+        }
+        if ($acao === 'negar') {
+            $sql = "UPDATE chamados SET status ='Negado' WHERE ID = '$id_pedido'";
+            $result = $con->query($sql);
+            $mensagens[] = [
+                'tipo' => 'sucesso',
+                'mensagem' => 'Chamado negado com sucesso!',
+            ];
+        }
+    }
+
 ?>
 
 <!DOCTYPE html>
@@ -108,6 +133,8 @@
 
                             <?php foreach($chamados as $chamado) { ?>
                                 <button class="chamado">
+                                    <div class="mascara-imagem"></div>
+
                                     <div>#<?php echo $chamado['ID']; ?></div>
 
                                     <div><?php echo ucfirst($chamado['tipo']); ?></div>
@@ -169,8 +196,11 @@
                                         </div>
 
                                         <div class="acoes">
-                                            <button class="assumir" type="submit">Assumir</button>
-                                            <button class="negar" type="button">Negar</button>
+                                            <form action="" method="POST" id="form">
+                                                <input type="hidden" name="id_pedido" value="<?php echo $chamado['ID']?>">
+                                                <button class="assumir" value="assumir" type="submit" name="acao">Assumir</button>
+                                                <button class="negar" value="negar" type="submit" name="acao">Negar</button>
+                                            </form>
                                         </div>
 
                                     </div>
