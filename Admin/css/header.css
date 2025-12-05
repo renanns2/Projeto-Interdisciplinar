@@ -1,20 +1,15 @@
-#pagina {
-    flex-direction: row;
-    padding-bottom: 0;
-    width: 70%;
-    min-height: 100vh;
-    position: relative;
-}
 
 header {
     display: flex;
     flex-direction: column;
     background-color: #10101B;
+    width: 13vw;
 }
 
 header > div {
     padding: 7%;
     width: 100%;
+    overflow: hidden;
 }
 
 header > div > img {
@@ -48,6 +43,17 @@ header nav a:hover {
 
 header nav a i {
     font-size: 1.5em;
+}
+
+i#chamado_expandir {
+    font-size: 1em;
+    transform: rotate(90deg);
+    color: white;
+    margin-left: auto;
+}
+
+#historico {
+    margin-left: 5%;
 }
 
 #selecionado {

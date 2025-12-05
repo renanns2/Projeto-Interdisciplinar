@@ -1,17 +1,5 @@
 <?php
     require_once(__DIR__ . '/../Config/auth.php');
-
-    $id_user = $_SESSION['usuario_id'];
-    include_once (__DIR__ . '/../Config/config.php');
-
-    $sql = "SELECT * FROM usuarios WHERE ID = $id_user";
-    $resultado = $con->query($sql);
-
-    if ($resultado->num_rows > 0) {
-        $usuario = $resultado->fetch_assoc();
-    }else {
-        echo 'Ocorreu um erro.';
-    }
 ?>
 
 <!DOCTYPE html>
@@ -20,6 +8,7 @@
         <title>Equipe</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
         <link rel="stylesheet" href="css/config.css">
         <link rel="stylesheet" href="css/Conta.css">
 

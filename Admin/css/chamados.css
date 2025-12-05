@@ -1,0 +1,202 @@
+#pagina {
+  width: 78%;
+}
+
+#ChamadosAdmin {
+  padding-left: 4%;
+  padding-right: 4%;
+  padding-top: 1%;
+  padding-bottom: 3%;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+#ChamadosAdmin > * {
+  overflow-x: hidden;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  height: auto;
+}
+#topo {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+#texto_chamado > p {
+  position: absolute;
+  transform: translateY(-5px);
+}
+
+#not_foto {
+  display: flex;
+  align-items: center;
+  gap: 10%;
+  margin-left: auto;
+  margin-right: 1%;
+}
+
+#notificacoes {
+  background-color: #191920;
+  border-radius: 999px;
+}
+
+#tabela {
+  display: flex;
+  flex-direction: column;
+  gap:25px
+}
+
+#foto_perfil {
+  aspect-ratio: 1;
+  height: 8vh;
+  background-color: #fff;
+  border-radius: 999px;
+}
+
+#filtro {
+  display: flex;
+  gap: 3%;
+}
+
+#filtro > button {
+  all:unset;
+  border-bottom: 2px solid transparent;
+  color: #9C9C9C;
+  font-size: 0.85em;
+  font-weight: 600;
+}
+
+#filtro > button.selecionado {
+  color: #fff;
+  border-bottom: 2px solid #9D4EDF;
+}
+
+#conteudotabela {
+  gap: 3vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.tabela {
+  display: flex; 
+  flex-direction: column; 
+  width: 100%;
+  gap:3vh;
+}
+
+.linha.header {
+  font-weight: 700;
+}
+.linha.header:hover {
+  transform: scale(1);
+}
+
+.chamado, .linha {
+  all:unset;
+  display: flex; 
+  background-color: #191920; 
+  border-radius: 15px; 
+  padding: 10px 0;
+  gap: 0.45em;
+  align-items: center;
+  font-size: 0.88em;
+  font-weight: 600;
+
+  transition: transform 0.3s ease-in-out;
+}
+
+.chamado > div, 
+.linha > div {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  flex: 1;
+  justify-content: center;
+  word-break: break-word; /* ESSENCIAL */
+}
+
+.baixa, .Aberto {
+  color: #1FB80B;
+}
+
+.media {
+  color: #FFBB00;
+}
+
+.alta {
+  color: #B80B0B;
+}
+
+/* Animações e menu dropdown*/
+.chamado-dropdown {
+  max-height: 0;
+  overflow: hidden;
+  background-color: #10101B;
+  transition: max-height 0.4s ease, padding 0.3s ease;
+}
+
+.chamado-dropdown.ativo {
+  background-color: #10101B;
+  border-radius: 30px;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  max-height: 800px;
+}
+
+.conteudo {
+  background-color: #22223b;
+  border-radius: 15px;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.infos {
+  display: flex;
+  gap: 8%;
+  background-color: #191a20;
+  border-radius: 8px;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 1em;
+  min-height: 3em;
+  height: auto;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  padding: 8px;
+}
+
+.descricao > p,
+.anexo > p {
+  font-size: 1em;
+  background-color: #191a20;
+  border-radius: 8px;
+  height: auto;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  padding: 12px;
+}
+
+.anexo > p {
+  border-radius: 40px;
+  min-height: 3em;
+  height: auto;
+  padding: 20px;
+}
+
+.anexo > p > img {
+  width: 100%;
+  border-radius: 20px;
+}

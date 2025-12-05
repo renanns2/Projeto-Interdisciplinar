@@ -56,11 +56,11 @@
         
         //Data
         if ($ordenar === 'data_asc') {
-            $sql = "SELECT * FROM chamados WHERE ID_Solicitante = ". $id_user . " ORDER BY data_ocorrido DESC, ID DESC";
+            $sql = "SELECT * FROM chamados WHERE ID_Solicitante = ". $id_user . " ORDER BY data_abertura DESC";
             $data = true;
         }
         if ($ordenar === 'data_desc') {
-            $sql = "SELECT * FROM chamados WHERE ID_Solicitante = ". $id_user . " ORDER BY data_ocorrido ASC, ID ASC";
+            $sql = "SELECT * FROM chamados WHERE ID_Solicitante = ". $id_user . " ORDER BY data_abertura ASC";
             $data = true;
         }
 
@@ -103,7 +103,7 @@
         <title>Reparar</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        
+        <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
         <link rel="stylesheet" href="css/header.css">
         <link rel="stylesheet" href="css/config.css">
         <link rel="stylesheet" href="css/Chamados.css">
