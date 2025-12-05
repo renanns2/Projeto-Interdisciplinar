@@ -87,7 +87,7 @@
                                     <p>Enviar nova foto</p>
                                     <p><strong>Redefinir</strong></p>
                                 </div>
-                            </div>
+                            </div> 
                         </div>
                         <!--Nome-->
                         <div class="linha"></div>
