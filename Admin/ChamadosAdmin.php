@@ -1,6 +1,7 @@
 <?php
     require_once(__DIR__ . '/../Config/auth.php');
     $mensagens = $_SESSION['mensagens'] ?? [];
+    unset($_SESSION['mensagens']);
 
 
 //Pegando a tabela chamados
@@ -61,7 +62,6 @@ ORDER BY FIELD(urgencia, 'alta', 'media', 'baixa');";
         header ("Location: ChamadosAdmin.php");
         exit;
     }
-
 ?>
 
 <!DOCTYPE html>
