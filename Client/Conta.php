@@ -1,6 +1,5 @@
 <?php
     require_once(__DIR__ . '/../Config/auth.php');
-    require_once(__DIR__ . '/../Config/redirectadmin.php');
 
     $mensagens = $_SESSION['mensagens'] ?? [];
     unset($_SESSION['mensagens']);

@@ -1,8 +1,6 @@
 <?php
     require_once(__DIR__ . '/../Config/auth.php');
-    require_once(__DIR__ . '/../Config/redirectadmin.php');
     $mensagens = $_SESSION['mensagens'] ?? [];
-    unset($_SESSION['mensagens']);
 
 
 //Pegando a tabela chamados
@@ -114,7 +112,7 @@ ORDER BY FIELD(urgencia, 'alta', 'media', 'baixa');";
                             <i class="fa-solid fa-user"></i>
                             Perfil
                         </a>
-                        <a href="Conta.php">
+                        <a href="../Client/logout.php">
                             <i class="fa-solid fa-arrow-right-from-bracket" ></i>
                             Sair
                         </a>
