@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 01/12/2025 às 09:54
+-- Tempo de geração: 06/12/2025 às 03:26
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -35,23 +35,25 @@ CREATE TABLE `chamados` (
   `data_conclusao` datetime DEFAULT NULL,
   `data_ocorrido` date DEFAULT NULL,
   `urgencia` enum('baixa','media','alta') DEFAULT NULL,
-  `status` enum('Concluído','Não resolvido','Cancelado','Incompleto','Aberto') DEFAULT NULL,
+  `status` enum('Concluído','Não resolvido','Cancelado','Incompleto','Aberto','Em andamento','Negado') DEFAULT NULL,
   `tecnico_responsavel` varchar(100) DEFAULT NULL,
   `anexo` varchar(255) DEFAULT NULL,
   `descricao` text DEFAULT NULL,
   `ID_Solicitante` int(11) DEFAULT NULL,
-  `setor_lab` varchar(30) NOT NULL
+  `setor_lab` varchar(30) NOT NULL,
+  `ID_tecnico` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Despejando dados para a tabela `chamados`
 --
 
-INSERT INTO `chamados` (`ID`, `tipo`, `solicitante`, `data_abertura`, `data_conclusao`, `data_ocorrido`, `urgencia`, `status`, `tecnico_responsavel`, `anexo`, `descricao`, `ID_Solicitante`, `setor_lab`) VALUES
-(93, 'computador', 'Renann Ferreira', '2025-12-01 05:30:02', NULL, '2025-12-01', 'media', 'Aberto', NULL, '', 'Tudo quebrado', 18, ''),
-(94, 'outros', 'Renann Ferreira', '2025-12-01 05:50:47', NULL, '2025-12-01', 'alta', 'Aberto', NULL, '', 'Unico que eu realmente me dediquei a escrever K', 18, 'SalaMaker'),
-(95, 'perifericos', 'Renann Ferreira', '2025-12-01 05:51:25', NULL, '2025-12-01', 'media', 'Aberto', NULL, '', 'Oláaa', 18, 'SalaMaker'),
-(96, 'computador', 'Renann Ferreira', '2025-12-01 05:51:34', NULL, '2025-12-01', 'media', 'Aberto', NULL, '', '123', 18, '231');
+INSERT INTO `chamados` (`ID`, `tipo`, `solicitante`, `data_abertura`, `data_conclusao`, `data_ocorrido`, `urgencia`, `status`, `tecnico_responsavel`, `anexo`, `descricao`, `ID_Solicitante`, `setor_lab`, `ID_tecnico`) VALUES
+(116, 'computador', 'Admin', '2025-12-05 17:20:07', NULL, '2025-12-05', 'media', 'Em andamento', 'Admin', '', 'Teste', 20, 'SalaMaker', 20),
+(117, 'perifericos', 'Admin', '2025-12-05 17:40:42', NULL, '2025-12-05', 'baixa', 'Em andamento', 'Admin', '', '321321', 20, '123', 20),
+(118, 'outros', 'Admin', '2025-12-05 17:40:49', NULL, '2025-12-05', 'media', 'Em andamento', 'Admin', '', '12312312', 20, '312321', 20),
+(119, 'computador', 'Admin', '2025-12-05 17:40:58', NULL, '2025-12-05', 'media', 'Em andamento', 'Admin', '', '2341234214', 20, '3123123', 20),
+(120, 'computador', 'Admin', '2025-12-05 18:45:09', NULL, '2025-12-05', 'media', 'Em andamento', 'Admin', 'anexo_69335265307f1.jpg', '123', 20, '123', 20);
 
 -- --------------------------------------------------------
 
@@ -69,8 +71,9 @@ CREATE TABLE `chamado_computador` (
 --
 
 INSERT INTO `chamado_computador` (`id_chamado`, `numero_pc`) VALUES
-(93, 321),
-(96, 123);
+(116, 24),
+(119, 2134),
+(120, 123);
 
 -- --------------------------------------------------------
 
@@ -89,7 +92,7 @@ CREATE TABLE `chamado_outros` (
 --
 
 INSERT INTO `chamado_outros` (`id_chamado`, `tipo_problema`, `tipo_personalizado`) VALUES
-(94, 'Outro', 'teste');
+(118, '', '');
 
 -- --------------------------------------------------------
 
@@ -109,7 +112,7 @@ CREATE TABLE `chamado_perifericos` (
 --
 
 INSERT INTO `chamado_perifericos` (`id_chamado`, `tipo_periferico`, `tipo_personalizado`, `numero`) VALUES
-(95, 'Outro', 'Teste', '312321');
+(117, 'Teclado', '', '123');
 
 -- --------------------------------------------------------
 
@@ -119,7 +122,7 @@ INSERT INTO `chamado_perifericos` (`id_chamado`, `tipo_periferico`, `tipo_person
 
 CREATE TABLE `usuarios` (
   `ID` int(11) NOT NULL,
-  `tipo_usuario` enum('cliente','admin') NOT NULL,
+  `tipo_usuario` enum('requisitante','admin') NOT NULL,
   `nome_completo` varchar(60) NOT NULL,
   `nome_exibicao` varchar(20) DEFAULT NULL,
   `email` varchar(80) DEFAULT NULL,
@@ -138,8 +141,7 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`ID`, `tipo_usuario`, `nome_completo`, `nome_exibicao`, `email`, `senha_hash`, `foto_perfil`, `contato`, `cargo`, `status_admin`, `descricaostatus`, `horario_trabalho`, `criado_em`) VALUES
-(17, 'cliente', 'Renann Ferreira', NULL, 'renannfsilva10@gmail.com', '$2y$10$lTFJRiERTLVsmtQj9/2eZeGLlxbisUMW8LdPcLkQZsgfJWqKCb5pC', NULL, NULL, NULL, NULL, NULL, NULL, '2025-11-25 05:58:51'),
-(18, 'cliente', 'Renann Ferreira', NULL, 'renan@gmail.com', '$2y$10$ZIvGIObKt9kiZDu5NYXZfui/5dO6b/Ej.Cpb/UlZ8WdpGLKRIR7ZK', NULL, NULL, NULL, NULL, NULL, NULL, '2025-11-28 21:12:23');
+(20, 'admin', 'Admin', NULL, 'admin@gmail.com', '$2y$10$EIzSk9.Le6PRQVGgGWzqmOr4rvuzoKgxasdQwTCKdnoKYXj5C1YzG', 'anexo_693333f7d3d79.jfif', 'admin@gmail.com', NULL, NULL, NULL, NULL, '2025-12-05 13:46:51');
 
 --
 -- Índices para tabelas despejadas
@@ -185,13 +187,13 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de tabela `chamados`
 --
 ALTER TABLE `chamados`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=97;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=121;
 
 --
 -- AUTO_INCREMENT de tabela `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- Restrições para tabelas despejadas
