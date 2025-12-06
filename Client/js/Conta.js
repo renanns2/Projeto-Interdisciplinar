@@ -106,6 +106,10 @@ cancelar.addEventListener('click', () => {
     foto_perfil.src = imagem_ori;
     img_ativa = false;
 
+    selects.forEach(select => {
+        select.value = select.dataset.original;
+    });
+
     inputs.forEach(input => {
         input.value = "";
     })

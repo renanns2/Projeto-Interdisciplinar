@@ -4,35 +4,64 @@
     $mensagens = $_SESSION['mensagens'] ?? [];
     unset($_SESSION['mensagens']);
 
-    $_SESSION['mensagens'] = $mensagens;
 
 //Pegando a tabela chamados
-    $sql = "SELECT * FROM chamados";
+    $ordenar = $_GET['ordenar'] ?? "";
+
+    if (empty($ordenar) || $ordenar === 'todos') {
+        $sql = "SELECT * FROM chamados
+        WHERE status IN ('Não resolvido', 'Incompleto', 'Aberto', 'Em andamento')
+        ORDER BY FIELD(status, 'Em andamento', 'Aberto', 'Incompleto', 'Não resolvido');";
+    }else if ($ordenar === 'andamento') {
+        $sql = "SELECT * FROM chamados
+WHERE status IN ('Em andamento')
+ORDER BY FIELD(urgencia, 'alta', 'media', 'baixa');";
+    }else if ($ordenar === 'espera') {
+        $sql = "SELECT * FROM chamados
+WHERE status IN ('Não resolvido', 'Incompleto')
+ORDER BY FIELD(urgencia, 'alta', 'media', 'baixa');";
+    }
+
     $resultado = $con->query($sql);
     $chamados = $resultado->fetch_all(MYSQLI_ASSOC);
-
 //Se veio aqui por um formulario
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $id_pedido = intval($_POST['id_pedido']);
         $acao = $_POST['acao'] ?? "";
+        $motivo = $_POST['motivo'] ?? "";
         $tecnico = $_SESSION['usuario_nome'];
 
         if ($acao === 'assumir') {
-            $sql = "UPDATE chamados SET status = 'Em andamento', tecnico_responsavel = '$tecnico' WHERE ID = '$id_pedido';";
+            $sql = "UPDATE chamados SET status = 'Em andamento', tecnico_responsavel = '$tecnico', ID_tecnico = '$id_user' WHERE ID = '$id_pedido';";
             $result = $con->query($sql);
             $mensagens[] = [
                 'tipo' => 'sucesso',
                 'mensagem' => 'Chamado assumido com sucesso!',
+                'assumir' => 'true',
             ];
+            $chamados['status'] = 'Em andamento';
+            $chamados['tecnico_responsavel'] = "$tecnico";
         }
         if ($acao === 'negar') {
+            if (empty($motivo)) {
+                $mensagens[] = [
+                    'tipo' => 'erro',
+                    'mensagem' => 'Informe um motivo para negar o pedido!',
+                ];
+                return;
+            }
             $sql = "UPDATE chamados SET status ='Negado' WHERE ID = '$id_pedido'";
             $result = $con->query($sql);
             $mensagens[] = [
                 'tipo' => 'sucesso',
                 'mensagem' => 'Chamado negado com sucesso!',
             ];
+            $chamados['status'] = 'Em andamento';
         }
+
+        $_SESSION['mensagens'] = $mensagens;
+        header ("Location: ChamadosAdmin.php");
+        exit;
     }
 
 ?>
@@ -62,8 +91,8 @@
                         Inicio
                     </a>
 
-                    <a href="Reparar.php">
-                        <i class="fa-solid fa-wrench"></i>
+                    <a href="ChamadosAdmin.php" id="selecionado">
+                        <i class="fa-solid fa-wrench" ></i>
                         Chamados
                         <i class="fa-solid fa-angle-right" id="chamado_expandir"></i>
 
@@ -75,13 +104,13 @@
                         </div>
                     </a>
 
-                    <a href="Chamados.php">
+                    <a href="Equipe.php">
                         <i class="fa-solid fa-user-group"></i>
                         Equipe
                     </a>
 
                     <div class="inferior">
-                        <a href="Conta.php" id="selecionado">
+                        <a href="../Client/Conta.php">
                             <i class="fa-solid fa-user"></i>
                             Perfil
                         </a>
@@ -92,7 +121,43 @@
                     </div>
                 </nav>
             </header>
-        
+
+            <div id="overlay" class="<?= !empty($mensagens) ? 'ativo': "" ?>"></div>
+            <div id="caixa_mensagem" class="<?= !empty($mensagens) ? 'ativo': "" ?>">
+                <h2>
+                    <?php 
+                        $tipos = array_column($mensagens, 'tipo'); // pegando apenas o tipo da array
+
+                        if (!in_array('erro', $tipos)) { // verificando se tem algum erro
+                            $h2 = "Sucesso!";
+                        }else {
+                            $h2 = "Erro!";
+                        }
+                        echo $h2;
+                    ?>
+                </h2>
+
+                <p>
+                    <?php
+                        foreach($mensagens as $mensagem) {
+                            echo $mensagem['mensagem'];
+
+                            if (!empty($mensagem['assumir'])) {
+                                $temAssumir = true;
+                            }
+                        }
+                    ?>
+                </p>
+
+                <div id="caixa_btn">
+                    <button id="fechar">Fechar</button>
+                    <?php if ($temAssumir) {
+                            echo '<a href="MeusChamados.php" id="meuschamados">Meus Chamados</a>';
+                        }
+                    ?>
+                </div>
+            </div>
+
             <div id="ChamadosAdmin">
                 <main>
                     <div id="topo">
@@ -113,9 +178,9 @@
 
                     <div id="conteudotabela">
                         <div id="filtro">
-                            <button id="todos" class="selecionado">Todos os chamados</button>
-                            <button id="andamento">Chamados em andamento</button>
-                            <button id="espera">Chamados em espera</button>
+                            <a href="ChamadosAdmin.php?ordenar=todos" class="<?= $ordenar === "todos" || empty($ordenar) ? "selecionado" : ""?>">Todos os chamados</a>
+                            <a href="ChamadosAdmin.php?ordenar=andamento" class="<?= $ordenar === "andamento" ? "selecionado" : ""?>">Chamados em andamento</a>
+                            <a href="ChamadosAdmin.php?ordenar=espera" class="<?= $ordenar === "espera" ? "selecionado" : ""?>">Chamados em espera</a>
                         </div>
 
                         <div class="tabela">
@@ -131,7 +196,7 @@
                             </div>
 
 
-                            <?php foreach($chamados as $chamado) { ?>
+                            <?php if (!empty($chamados)) { foreach($chamados as $chamado) { ?>
                                 <button class="chamado">
                                     <div class="mascara-imagem"></div>
 
@@ -170,6 +235,8 @@
                                             <div class="info">
                                                 <p>ID do Solicitante: </p>
                                                 <p>Solicitante:</p>
+                                                <p>ID do técnico: <?php echo $chamado['ID_tecnico']?></p>
+                                                <p>Nome do técnico: <?php echo $chamado['tecnico_responsavel']?></p>
                                                 <p>Setor ou laboratorio: <?php echo $chamado['setor_lab']?></p>
                                                 <!--se computador, perifericos, outros, mostrar informações extras aqui-->
                                                 <p>Data do ocorrido: <?php echo $chamado['data_ocorrido']?></p>
@@ -198,17 +265,26 @@
                                         <div class="acoes">
                                             <form action="" method="POST" id="form">
                                                 <input type="hidden" name="id_pedido" value="<?php echo $chamado['ID']?>">
-                                                <button class="assumir" value="assumir" type="submit" name="acao">Assumir</button>
-                                                <button class="negar" value="negar" type="submit" name="acao">Negar</button>
+                                                <?php if ($chamado['ID_tecnico'] !== "$id_user") {?>
+                                                    <button class="assumir" value="assumir" type="submit" name="acao">Assumir</button>
+                                                <?php }?>
+                                                <button class="negar" type="button">Negar</button>
+
+                                                <div class="menu_negar">
+                                                    <h2>Informe o motivo de negar o pedido:</h2>
+                                                    <textarea name="motivo" id="motivo"></textarea>
+                                                    <div class="menu_btns">
+                                                        <button type="submit" name="acao" value="negar" class="negar_menu">Negar pedido</button>
+                                                        <button type="button" class="cancelar_menu">Cancelar</button>
+                                                    </div>
+                                                </div>
                                             </form>
                                         </div>
 
                                     </div>
                                 </div>
-                            <?php }?>
+                            <?php }} else { echo "<p>Nenhum chamado encontrado!</p>";}?>
                         </div>
-
-
                     </div>
                 </main>
 

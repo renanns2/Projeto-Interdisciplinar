@@ -265,7 +265,7 @@
                             <i class="fa-solid fa-user"></i>
                             Conta
                         </a>
-                        <a href="Conta.php">
+                        <a href="logout.php">
                             <i class="fa-solid fa-arrow-right-from-bracket" ></i>
                             Sair
                         </a>
